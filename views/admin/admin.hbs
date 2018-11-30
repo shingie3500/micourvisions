@@ -1,0 +1,67 @@
+{{>headerUser}}
+
+<!-- End Header -->
+<section id="content">
+    <div class="container">
+        <form action="/admin/data" method="post">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" name="name" id="name" placeholder="Enter name">
+            </div>
+            <div class="form-group">
+                <label for="shortdescription">Short Description</label>
+                <input type="text" class="form-control" name="shortDescription" id="shortdescription" placeholder="Short Description">
+            </div>
+            <div class="form-group">
+                <label for="fullDescription">Full Description</label>
+                <textarea class="form-control" id="fullDescription" name="fullDescription" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="imageFV">ImageFV (Face-view)</label>
+                <input type="file" class="form-control-file" name="imageFV" id="imageFV">
+            </div>
+            <div class="form-group">
+                <label for="imageSV">ImageSV (Side-view)</label>
+                <input type="file" class="form-control-file" name="imageSV" id="imageSV">
+            </div>
+            <div class="form-group">
+                <label for="imageBV">ImageBV (Front-view)</label>
+                <input type="file" class="form-control-file" name="imageBV" id="imageBV">
+            </div>
+            <div class="form-group">
+                <label for="price">Price</label>
+                <input type="number" min="0" name="price" class="form-control" id="price" >
+            </div>
+            <div class="form-group">
+                <label for="quantity">Quantity</label>
+                <input type="number" min="0" name="quantity" class="form-control" id="quantity" >
+            </div>
+            <div class="form-group">
+                <select class="form-control" name="category">
+                    <option value="">Select Category</option >
+                    <option value="mobile">Mobile</option >
+                    <option value="laptop">Laptop</option >
+                    <option value=""></option >
+                </select>                
+            </div>
+            <div class="form-group">
+                <select class="form-control" name="brand">
+                    <option value="">Select Brand</option>
+                    <option value="apple">Apple</option>
+                    <option value="dell">Dell</option>
+                    <option value="huawei">Huawei</option>
+                    <option value="hp">Hp</option>
+                    <option value="lenovo">Lenovo</option>
+                    <option value="microsoft">Microsoft</option>
+                    <option value="nokia">Nokia</option>
+                    <option value="samsung">Samsung</option>
+                    <option value="transcend">Transcend</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</section>
+<div style="height:30px"></div>
+<!-- End Content -->
+{{>footerUser}}

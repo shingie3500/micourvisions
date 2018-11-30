@@ -1,0 +1,187 @@
+{{>headerUser}}
+<!-- End Header -->
+<section id="content">
+    <div class="container">
+        <div class="bread-crumbs">
+            <a href="/home"><i class="icon ion-ios-home"></i></a>
+            <a href="#">Huawei Products</a>
+        </div>
+        <!-- End Bread Crumb -->
+        <div class="content-pages">
+            <div class="row">
+                <div class="col-md-3 col-sm-4 col-sx-12">
+                    <div class="sidebar-left sidebar-shop">
+                        <div class="widget widget-product-cat">
+                            <h2 class="widget-title title14 font-bold text-uppercase">Brand</h2>
+                            <div class="widget-content">
+                                <ul class="list-none filter-attr-default">
+                                    <li><a href="/shop/mobile-grid-view">All Brands </a></li>
+                                    <li><a href="/shop/apple-mobile-grid">Apple </a></li>
+                                    <li><a href="/shop/hauwei-mobile-grid" class="active">Huawei </a></li>
+                                    <li><a href="/shop/samsung-mobile-grid">Samsung </a></li>
+                                    <li><a href="/shop/nokia-mobile-grid">Nokia </a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- End Widget -->
+                        <div class="widget widget-price">
+                            <h2 class="widget-title title14 font-bold text-uppercase">price</h2>
+                            <div class="widget-content">
+                                <div class="range-filter">
+                                    <ul class="list-inline-block">
+                                        <li>
+                                            <div class="amount"></div>
+                                        </li>
+                                        <li>
+                                            <form action="/shop/{{query}}" method="get">
+                                                <button type="submit" id="pricefilter" class="btn-filter-price shop-button bg-color">Filter</button>
+                                                <input type="text" value="{{min}}" id="min" name="minprice" hidden>
+                                                <input type="text" value="{{max}}" id="max" name="maxprice" hidden>
+                                            </form>
+                                        </li>
+                                    </ul>
+                                    <div class="slider-range"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Widget -->
+                    </div>
+                </div>
+                <div class="col-md-9 col-sm-8 col-sx-12">
+                    <div class="shop-title">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h2 class="font-bold title30 text-uppercase title-line-after pull-left">Huawei Products</h2>
+                                <ul class="list-inline-block sort-bar pull-right">
+                                    <li>
+                                        <div class="select-box sort-by">
+                                            <select id="{{selected}}" class="select" size="1" name="links" onchange="functionToTriggerClick(this.value)">
+                                                <option value="">Sort by</option>
+                                                <option id="pricedesc" value="http://localhost:3000/shop/huawei-mobile-grid-pricedesc">Price
+                                                    Desc</option>
+                                                <option id="priceasc" value="http://localhost:3000/shop/huawei-mobile-grid-priceasc">Price
+                                                    Asc</option>
+                                                <option id="namedesc" value="http://localhost:3000/shop/huawei-mobile-grid-namedesc">Name
+                                                    Desc</option>
+                                                <option id="nameasc" value="http://localhost:3000/shop/huawei-mobile-grid-nameasc">Name
+                                                    Asc</option>
+                                            </select>
+                                            <script>
+                                                function functionToTriggerClick(link) {
+
+                                                    if (link != '') {
+                                                        window.location.href = link;
+                                                    }
+                                                }
+                                            </script>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="view-type">
+                                            <a href="/shop/huawei-grid" class="grid-view active"><i class="icon ion-grid"></i></a>
+                                            <a href="/shop/huawei-list" class="list-view"><i class="icon ion-android-menu"></i></a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-gridview grid-with-sidebar ">
+                        <div class="pagi-nav text-center">
+                            <div class="hidden">
+                                {{#each nextp}}
+                                <input type="text" id="nextdisable" value={{nxt}}>
+                                {{/each}}
+                                <input type="text" id="prevdisable" value={{prev}}>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2 col-md-offset-10">
+                                    <a id="prev" class="page-item"><i class="icon ion-ios-arrow-left"></i></a>
+                                    <a id="next" class="page-item"><i class="icon ion-ios-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        {{#each firstchunk}}
+                        <div id="content-page1" class="row show">
+                            {{#each this}}
+                            <div class="col-md-4 col-sm-6 col-xs-6">
+                                <div class="item-product text-center style1">
+                                    <div class="product-thumb">
+                                        <a href="#" class="product-thumb-link zoom-thumb"><img src="../{{this.image}}"
+                                                alt=""></a>
+                                        <a href="/detail-view/{{this._id}}" class="quickview-link fancybox fancybox.iframe">Detail
+                                            view</a>
+                                    </div>
+                                    <div class="product-info">
+                                        <a href="#" class="cat-parent color">{{this.category}}</a>
+                                        <h3 class="title16 font-bold product-title"><a href="#">{{this.title}}</a></h3>
+                                        <div class="product-price">
+                                            <ins class="font-bold"><span>${{this.price}}</span></ins>
+                                        </div>
+                                        <div class="product-extra-link style1">
+                                            <a href="#" class="wishlist-link color title30"><i class="icon ion-android-favorite-outline"></i></a>
+                                            <a href="/add-to-cart/{{this._id}}" class="addcart-link shop-button color">Add
+                                                to cart</a>
+                                            <a href="#" class="compare-link color title30"><i class="icon ion-ios-checkmark-outline"></i></a>
+                                        </div>
+                                        <div class="product-rate">
+                                            <div class="product-rating" style="width:100%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {{/each}}
+                        </div>
+                        {{/each}}
+                    </div>
+                    <div class="product-gridview grid-with-sidebar ">
+                        {{#each product}}
+                        <div id={{this.pagecontent}} class="row hidden">
+                            {{#each this}}
+                            <div class="col-md-4 col-sm-6 col-xs-6">
+                                <div class="item-product text-center style1">
+                                    <div class="product-thumb">
+                                        <a href="#" class="product-thumb-link zoom-thumb"><img src="../{{this.image}}"
+                                                alt=""></a>
+                                        <a href="/detail-view/{{this._id}}" class="quickview-link fancybox fancybox.iframe">Detail
+                                            view</a>
+                                    </div>
+                                    <div class="product-info">
+                                        <a href="#" class="cat-parent color">{{this.category}}</a>
+                                        <h3 class="title16 font-bold product-title"><a href="#">{{this.title}}</a></h3>
+                                        <div class="product-price">
+                                            <ins class="font-bold"><span>${{this.price}}</span></ins>
+                                        </div>
+                                        <div class="product-extra-link style1">
+                                            <a href="#" class="wishlist-link color title30"><i class="icon ion-android-favorite-outline"></i></a>
+                                            <a href="/add-to-cart/{{this._id}}" class="addcart-link shop-button color">Add
+                                                to cart</a>
+                                            <a href="#" class="compare-link color title30"><i class="icon ion-ios-checkmark-outline"></i></a>
+                                        </div>
+                                        <div class="product-rate">
+                                            <div class="product-rating" style="width:100%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {{/each}}
+                        </div>
+                        {{/each}}
+                    </div>
+                    <div class="pagi-nav text-center">
+                        <a class="page-current active page-item page-item-btn" id="page1">1</a>
+                        {{#each page}}
+                        <a href="#" id={{pageId}} class="page-item page-item-btn">{{pagenum}} </a>
+                        {{/each}}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- End Content Pages -->
+    </div>
+</section>
+<!-- End Content -->
+{{>footerUser}}
