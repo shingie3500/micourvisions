@@ -102,8 +102,13 @@
         url: Url,
         type: 'GET',
         success: function (result){
-          alert("Login First!!!")
-          window.location.href = "http://micourvisions.com" + result;
+          if (result.toString() == "/user/signin") {
+            alert("Login First!!!")
+            window.location.href = "http://micourvisions.com" + result;
+          }
+          else {
+            console.log('added to wishlist');
+          }
         },
         error: function(error){
           console.log(error);

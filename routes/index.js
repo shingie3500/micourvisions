@@ -141,6 +141,75 @@ router.get('/addtoWishlist/:id', isLoggedIn2, function (req, res, next) {
     });
 
 });
+router.get('/shop/addtoWishlist/:id', isLoggedIn2, function (req, res, next) {
+
+    Product.find({
+        _id: req.params.id
+    }).then((docs) => {
+        console.log(req.user)
+        Wishlist.findOne({
+            'userId': req.user._id
+        }, (err, obj) => {
+            if (err) {
+                return ('error: ' + err);
+            } else if (obj) {
+                var list = [];
+                var found = false;
+                for (var i = 0; i < obj.list.length; i++) {
+                    list.push(obj.list[i]);
+                };
+
+                for (var i = 0; i < list.length; i++) {
+                    var s = list[i]._id;
+                    var a = list[0]._id;
+                    var x = s.toString();
+                    var y = a.toString();
+
+                    console.log(x + '=====' + y);
+
+                    if (x == y) {
+                        found = true;
+                        console.log(found);
+                        break;
+                    }
+
+                };
+                if (found == false) {
+                    list.push(docs[0]);
+                }
+                console.log(found);
+                console.log(list);
+                Wishlist.updateOne({
+                    'userId': req.user._id
+                }, {
+                    $set: {
+                        list: list
+                    }
+                }, (err, raw) => {
+                    if (err) {
+                        res.send(err);
+                    }
+                    res.send(raw);
+                });
+            } else {
+                var newWishlist = new Wishlist();
+                newWishlist.userId = req.user._id;
+                newWishlist.firstname = req.user.firstname;
+                newWishlist.lastname = req.user.lastname;
+                newWishlist.list = docs;
+                newWishlist.save((err, res) => {
+                    if (err) {
+                        console.log(err);
+                    }
+                    //console.log(newWishlist);
+                });
+            }
+        });
+    }).catch((error) => {
+        console.log(error);
+    });
+
+});
 
 router.get('/', function (req, res, next) {
     var productschun = [],
