@@ -2,6 +2,7 @@ const express = require('express'),
     router = express.Router(),
     Product = require('../models/product'),
     Order = require('../models/order'),
+    Wishlist = require('../models/wishlist'),
     Cart = require('../models/cart');
 
 /* GET home page. */
@@ -12,6 +13,7 @@ router.get('/checkout', isLoggedIn, function (req, res, next) {
 
     var cart = new Cart(req.session.cart);
     res.render('pages/checkout', {
+        user: req.user,
         product: cart.generateArray(),
         totalPrice: cart.totalPrice
     });
@@ -24,7 +26,6 @@ router.post('/checkout', isLoggedIn, function (req, res, next) {
     }
     var cart = new Cart(req.session.cart);
     var fields = {
-        user: req.user,
         cart: cart,
         country: req.body.country,
         address: req.body.address,
@@ -47,6 +48,76 @@ router.post('/checkout', isLoggedIn, function (req, res, next) {
         req.session.cart = null;
         res.redirect('/');
     });
+});
+
+router.get('/addtoWishlist/:id', isLoggedIn, function (req, res, next) {
+
+    Product.find({
+        _id: req.params.id
+    }).then((docs) => {
+        console.log(req.user)
+        Wishlist.findOne({
+            'userId': req.user._id
+        }, (err, obj) => {
+            if (err) {
+                return ('error: ' + err);
+            } else if (obj) {
+                var list = [];
+                var found = false;
+                for (var i = 0; i < obj.list.length; i++) {
+                    list.push(obj.list[i]);
+                };
+
+                for (var i = 0; i < list.length; i++) {
+                    var s = list[i]._id;
+                    var a = list[0]._id;
+                    var x = s.toString();
+                    var y = a.toString();
+
+                    console.log(x + '=====' + y);
+
+                    if (x == y) {
+                        found = true;
+                        console.log(found);
+                        break;
+                    }
+
+                };
+                if (found == false) {
+                    list.push(docs[0]);
+                }
+                console.log(found);
+                console.log(list);
+                Wishlist.updateOne({
+                    'userId': req.user._id
+                }, {
+                    $set: {
+                        list: list
+                    }
+                }, (err, raw) => {
+                    if (err) {
+                        res.send(err);
+                    }
+                    res.send(raw);
+                });
+            } else {
+                var newWishlist = new Wishlist();
+                newWishlist.userId = req.user._id;
+                newWishlist.firstname = req.user.firstname;
+                newWishlist.lastname = req.user.lastname;
+                newWishlist.list = docs;
+                newWishlist.save((err, res) => {
+                    if (err) {
+                        console.log(err);
+                    }
+                    //console.log(newWishlist);
+                });
+            }
+        });
+    }).catch((error) => {
+        console.log(error);
+    });
+
 });
 
 router.get('/', function (req, res, next) {
@@ -105,6 +176,8 @@ router.get('/', function (req, res, next) {
             accessories1.push(response.slice(3, 7));
             accessories2.push(response.slice(7, 11));
             res.render('pages/home', {
+
+                user: req.user,
                 product: productschun,
                 trending: trending,
                 featured: featured,
@@ -184,6 +257,8 @@ router.get('/home', function (req, res, next) {
             accessories1.push(response.slice(3, 7));
             accessories2.push(response.slice(7, 11));
             res.render('pages/home', {
+
+                user: req.user,
                 product: productschun,
                 trending: trending,
                 featured: featured,
@@ -208,25 +283,25 @@ router.get('/home', function (req, res, next) {
 });
 
 router.get('/about', function (req, res, next) {
-    res.render('pages/about');
+    res.render('pages/about', {
+                user: req.user
+    });
 });
 
-router.get('/add-to-cart/:id', function (req, res, next) {
-    var productId = req.params.id;
-    var cart = new Cart(req.session.cart ? req.session.cart : {
-        items: {}
+    router.get('/add-to-cart/:id', function (req, res, next) {
+        var productId = req.params.id;
+        var cart = new Cart(req.session.cart ? req.session.cart : {
+            items: {}
+        });
+        Product.findById(productId, (err, product) => {
+            if (err) {
+                console.log(err);
+            }
+            cart.add(product, product.id);
+            res.redirect(req.headers.referer);
+            req.session.cart = cart;
+        })
     });
-    Product.findById(productId, (err, product) => {
-        if (err) {
-            console.log(err);
-        }
-        cart.add(product, product.id);
-        req.session.cart = cart;
-        res.render()
-        console.log("Product added to cart!!!")
-        //res.redirect(req.headers.referer);
-    })
-});
 
 router.get('/add1-to-cart/:id', function (req, res, next) {
     router.use((req, res, next) => {
@@ -272,18 +347,22 @@ router.get('/remove-to-cart/:id', (req, res, next) => {
 router.get('/shopping-cart', (req, res, next) => {
     if (!req.session.cart) {
         return res.render('pages/cart', {
+            user: req.user,
             product: null
         });
     }
     var cart = new Cart(req.session.cart);
     res.render('pages/cart', {
+        user: req.user,
         product: cart.generateArray(),
         totalPrice: cart.totalPrice
     })
 })
 
 router.get('/contact', function (req, res, next) {
-    res.render('pages/contact');
+    res.render('pages/contact', {
+        user: req.user
+    });
 });
 
 router.get('/detail-view/:id', function (req, res, next) {
@@ -294,8 +373,9 @@ router.get('/detail-view/:id', function (req, res, next) {
         if (err) {
             return res.redirect('/');
         }
-        console.log(product);
         res.render('pages/detailview', {
+
+            user: req.user,
             layout: 'layout_2',
             product: product
         });

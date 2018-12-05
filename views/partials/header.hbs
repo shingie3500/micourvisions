@@ -14,11 +14,18 @@
                                 <span class="smoke"><i class="title18 white icon ion-ios-search-strong"></i>Search</span>
                             </form>
                         </li>
+                      
                         {{#if login}}
                         <li>
-                            <a href="/user/profile" class="sign-up smoke"><span class="white title18"><i class="icon ion-android-person"></i></span>User
-                                Account</a>
-                            <a href="/user/logout" class="sign-up smoke"><span class="white title18"><i class="icon ion-android-person"></i></span>Logout</a>
+                            <div class="mini-cart-box mini-cart1 dropdown1">
+                                <a class="dropbtn sign-up smoke"><span class="white title18"><i class="icon ion-android-person"></i></span>{{user.firstname}}</a>
+                                <div class="dropdown1-content">
+                                    <a href="#">Link 1</a>
+                                    <a href="#">Link 2</a>
+                                    <a href="#">Link 3</a>
+                                    <a href="/user/logout" class="sign-up smoke color"><span class="black title18"><i class="icon ion-android-person"></i></span>Logout</a>
+                                </div>
+                            </div>
                         </li>
                         {{else}}
                         <li>
@@ -39,7 +46,7 @@
                                 </a>
                                 <div class="mini-cart-content dropdown-list text-left">
                                     <h2 class="title18 font-bold rale-font">{{session.cart.totalQty}} Item(s) in my cart</h2>
-                                   
+                        
                                     <div class="list-mini-cart-it em">
                                         {{#each session.cart.items}}
                                         <div class="product-mini-cart table">

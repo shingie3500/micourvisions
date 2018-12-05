@@ -14,11 +14,18 @@
                                 <span class="smoke"><i class="title18 white icon ion-ios-search-strong"></i>Search</span>
                             </form>
                         </li>
+                
                         {{#if login}}
                         <li>
-                            <a href="/user/profile" class="sign-up smoke"><span class="white title18"><i class="icon ion-android-person"></i></span>User
-                                Account</a>
-                            <a href="/user/logout" class="sign-up smoke"><span class="white title18"><i class="icon ion-android-person"></i></span>Logout</a>
+                            <div class="mini-cart-box mini-cart1 dropdown1">
+                                <a class="dropbtn sign-up smoke"><span class="white title18"><i class="icon ion-android-person"></i></span>{{user.firstname}}</a>
+                                <div class="dropdown1-content">
+                                    <a href="#">Link 1</a>
+                                    <a href="#">Link 2</a>
+                                    <a href="#">Link 3</a>
+                                    <a href="/user/logout" class="sign-up smoke color"><span class="black title18"><i class="icon ion-android-person"></i></span>Logout</a>
+                                </div>
+                            </div>
                         </li>
                         {{else}}
                         <li>
@@ -38,13 +45,13 @@
                                     <span class="mini-cart-label smoke">Cart</span>
                                 </a>
                                 <div class="mini-cart-content dropdown-list text-left">
-                                    <h2 class="title18 font-bold rale-font">{{session.cart.totalQty}} Item(s) in my
-                                        cart</h2>
+                                    <h2 class="title18 font-bold rale-font">{{session.cart.totalQty}} Item(s) in my cart</h2>
+                
                                     <div class="list-mini-cart-it em">
                                         {{#each session.cart.items}}
                                         <div class="product-mini-cart table">
                                             <div class="product-thumb">
-                                                <a href="/detail-view/{{this.item._id}}" class="product-thumb-link"><img alt="" src="../{{this.item.imagePath}}"></a>
+                                                <a href="/detail-view" class="product-thumb-link"><img alt="" src="{{this.item.imagePath}}"></a>
                                             </div>
                                             <div class="product-info">
                                                 <h3 class="product-title title16 font-bold"><a href="#">{{this.item.title}}</a></h3>
@@ -57,8 +64,7 @@
                                                 </div>
                                             </div>
                                             <div class="product-delete text-right">
-                                                <a href="/remove-to-cart/{{this.item._id}}" class="remove-product"><i
-                                                        class="icon ion-trash-a"></i></a>
+                                                <a href="/remove-to-cart/{{this.item._id}}" class="remove-product"><i class="icon ion-trash-a"></i></a>
                                             </div>
                                         </div>
                                         {{/each}}

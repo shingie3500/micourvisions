@@ -23,7 +23,6 @@ passport.use('local.signup', new LocalStrategy({
         req.checkBody('password', 'Invalid password').notEmpty().isLength({
             min: 4
         });
-        console.log(req.body.email);
         var errors = req.validationErrors();
         if (errors) {
             var message = [];
@@ -43,6 +42,7 @@ passport.use('local.signup', new LocalStrategy({
                     message: 'Email is already in use'
                 });
             }
+            console.log(password);
             var newUser = new User();
             newUser.email = email;
             newUser.password = newUser.encryptPassword(password);
@@ -83,7 +83,7 @@ passport.use('local.signin', new LocalStrategy({
                 message: 'No user found. Create an account first....'
             });
         }
-        if(user.validPassword(password)){
+        if(!user.validPassword(password)){
             return done(null, false, {
                 message: 'Wrong password...'
             });

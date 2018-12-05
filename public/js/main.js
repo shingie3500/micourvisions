@@ -92,8 +92,8 @@ $(document).ready(() => {
 
         }
         e.preventDefault();
-    })
-
+    });
+    
     function sort() {
         var id = $('select.select').attr('id');
         if (id == 'priceDesc') {

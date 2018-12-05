@@ -3,7 +3,6 @@ const router = express.Router();
 const csrf = require('csurf');
 const passport = require('passport');
 const Order = require('../models/order');
-const Product = require('../models/product');
 const Cart = require('../models/cart');
 
 var csrfProtect = csrf();
@@ -12,16 +11,19 @@ router.use(csrfProtect);
 /* GET users listing. */
 
 router.get('/profile', isLoggedIn, (req, res, next) => {
-  Order.find({user: req.user}, (err, orders)=>{
-    if(err){
+  Order.find({
+    user: req.user
+  }, (err, orders) => {
+    if (err) {
       return res.write('Error!');
     }
     var cart;
-    orders.forEach((order)=>{
+    orders.forEach((order) => {
       cart = new Cart(order.cart);
       order.items = cart.generateArray();
     })
     res.render('user/profile', {
+      user: req.user,
       layout: 'layout_2',
       order: orders
     })
@@ -35,7 +37,7 @@ router.get('/logout', isLoggedIn, (req, res, next) => {
 
 
 //not logged in users
-router.use('/', notLoggedIn, (req, res, next)=>{
+router.use('/', notLoggedIn, (req, res, next) => {
   next();
 })
 
@@ -74,14 +76,15 @@ router.post('/signin', passport.authenticate('local.signin', {
 
 module.exports = router;
 
-function isLoggedIn(req, res , next){
-  if (req.isAuthenticated()){
+function isLoggedIn(req, res, next) {
+  if (req.isAuthenticated()) {
     return next();
   }
   res.redirect('/');
 }
-function notLoggedIn(req, res , next){
-  if (!req.isAuthenticated()){
+
+function notLoggedIn(req, res, next) {
+  if (!req.isAuthenticated()) {
     return next();
   }
   res.redirect('/');
