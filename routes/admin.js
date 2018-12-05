@@ -12,7 +12,27 @@ const express = require('express'),
         storage: storage
     }),
     Product = require('../models/product'),
-    router = express.Router();
+    router = express.Router(),
+    featuredmobile = [],
+    featuredlaptop = [];
+
+Product.find({
+        category: 'mobile'
+    }).then((response) => {
+        featuredmobile.push(response.slice(0, 5));
+    })
+    .catch((error) => {
+        console.log(error);
+    });
+Product.find({
+        category: 'laptop'
+    }).then((response) => {
+        featuredlaptop.push(response.slice(0, 5));
+
+    })
+    .catch((error) => {
+        console.log(error);
+    });
 
 router.get('/admin', (req, res, next) => {
     res.render('admin/admin', {
@@ -20,13 +40,17 @@ router.get('/admin', (req, res, next) => {
     });
 })
 var fupload = upload.fields([{
-    name: 'image', maxCount : 1
+    name: 'image',
+    maxCount: 1
 }, {
-    name: 'imageSV', maxCount : 1
+    name: 'imageSV',
+    maxCount: 1
 }, {
-    name: 'imageFV', maxCount : 1
+    name: 'imageFV',
+    maxCount: 1
 }, {
-    name: 'imageBV', maxCount : 1
+    name: 'imageBV',
+    maxCount: 1
 }]);
 
 router.post('/data', fupload, function (req, res, next) {
@@ -42,7 +66,7 @@ router.post('/data', fupload, function (req, res, next) {
         quantity: req.body.quantity,
         category: req.body.category,
         brand: req.body.brand,
-        dealoftheday : false
+        dealoftheday: false
     }
     var product = new Product(fields);
     product.save(function (err, produc) {

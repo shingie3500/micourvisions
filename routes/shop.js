@@ -1,8 +1,27 @@
 const express = require('express'),
     router = express.Router(),
     Product = require('../models/product'),
-    upload = require('express-fileupload');
+    upload = require('express-fileupload'),
+    featuredmobile = [],
+    featuredlaptop = [];
 
+Product.find({
+        category: 'mobile'
+    }).then((response) => {
+        featuredmobile.push(response.slice(0, 5));
+    })
+    .catch((error) => {
+        console.log(error);
+    });
+Product.find({
+        category: 'laptop'
+    }).then((response) => {
+        featuredlaptop.push(response.slice(0, 5));
+
+    })
+    .catch((error) => {
+        console.log(error);
+    });
 router.use(upload());
 
 /* main shop page. */
@@ -35,6 +54,8 @@ router.get('/grid-view', function (req, res, next) {
             });
             res.render('shop/gridview', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -94,6 +115,8 @@ router.get('/pricefilter-gridview', function (req, res, next) {
             });
             res.render('shop/gridview', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -137,6 +160,8 @@ router.get('/list-view', function (req, res, next) {
             });
             res.render('shop/listview', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -197,6 +222,8 @@ router.get('/pricefilter-listview', function (req, res, next) {
             });
             res.render('shop/listview', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -242,6 +269,8 @@ router.get('/apple-list', function (req, res, next) {
             });
             res.render('shop/apple', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -303,6 +332,8 @@ router.get('/pricefilter-applelist', function (req, res, next) {
             });
             res.render('shop/apple', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -349,6 +380,8 @@ router.get('/apple-grid', function (req, res, next) {
             });
             res.render('shop/applegrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -410,6 +443,8 @@ router.get('/pricefilter-applegrid', function (req, res, next) {
             });
             res.render('shop/applegrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -455,6 +490,8 @@ router.get('/dell-list', function (req, res, next) {
             });
             res.render('shop/dell', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -516,6 +553,8 @@ router.get('/pricefilter-delllist', function (req, res, next) {
             });
             res.render('shop/dell', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -561,6 +600,8 @@ router.get('/dell-grid', function (req, res, next) {
             });
             res.render('shop/dellgrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -622,6 +663,8 @@ router.get('/pricefilter-dellgrid', function (req, res, next) {
             });
             res.render('shop/dellgrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -667,6 +710,8 @@ router.get('/hp-list', function (req, res, next) {
             });
             res.render('shop/hp', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -728,6 +773,8 @@ router.get('/pricefilter-hplist', function (req, res, next) {
             });
             res.render('shop/hp', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -773,6 +820,8 @@ router.get('/hp-grid', function (req, res, next) {
             });
             res.render('shop/hpgrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -834,6 +883,8 @@ router.get('/pricefilter-hpgrid', function (req, res, next) {
             });
             res.render('shop/hpgrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -880,6 +931,8 @@ router.get('/huawei-list', function (req, res, next) {
             });
             res.render('shop/huawei', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -941,6 +994,8 @@ router.get('/pricefilter-huaweilist', function (req, res, next) {
             });
             res.render('shop/huawei', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -987,6 +1042,8 @@ router.get('/huawei-grid', function (req, res, next) {
             });
             res.render('shop/huaweigrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -1048,6 +1105,8 @@ router.get('/pricefilter-huaweigrid', function (req, res, next) {
             });
             res.render('shop/huaweigrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -1094,6 +1153,8 @@ router.get('/lenovo-list', function (req, res, next) {
             });
             res.render('shop/lenovo', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -1155,6 +1216,8 @@ router.get('/pricefilter-lenovolist', function (req, res, next) {
             });
             res.render('shop/lenovo', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -1201,6 +1264,8 @@ router.get('/lenovo-grid', function (req, res, next) {
             });
             res.render('shop/lenovogrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -1262,6 +1327,8 @@ router.get('/pricefilter-lenovogrid', function (req, res, next) {
             });
             res.render('shop/lenovogrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -1306,6 +1373,8 @@ router.get('/nokia-list', function (req, res, next) {
             });
             res.render('shop/nokia', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -1366,6 +1435,8 @@ router.get('/pricefilter-nokialist', function (req, res, next) {
             });
             res.render('shop/nokia', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -1411,6 +1482,8 @@ router.get('/nokia-grid', function (req, res, next) {
             });
             res.render('shop/nokiagrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -1472,6 +1545,8 @@ router.get('/pricefilter-nokiagrid', function (req, res, next) {
             });
             res.render('shop/nokiagrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -1518,6 +1593,8 @@ router.get('/samsung-list', function (req, res, next) {
             });
             res.render('shop/samsung', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -1579,6 +1656,8 @@ router.get('/pricefilter-samsunglist', function (req, res, next) {
             });
             res.render('shop/samsung', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -1625,6 +1704,8 @@ router.get('/samsung-grid', function (req, res, next) {
             });
             res.render('shop/samsunggrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -1686,6 +1767,8 @@ router.get('/pricefilter-samsunggrid', function (req, res, next) {
             });
             res.render('shop/samsunggrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -1732,6 +1815,8 @@ router.get('/transcend-list', function (req, res, next) {
             });
             res.render('shop/transcend', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -1793,6 +1878,8 @@ router.get('/pricefilter-transcendlist', function (req, res, next) {
             });
             res.render('shop/transcend', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -1839,6 +1926,8 @@ router.get('/transcend-grid', function (req, res, next) {
             });
             res.render('shop/transcend-grid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -1900,6 +1989,8 @@ router.get('/pricefilter-transcendgrid', function (req, res, next) {
             });
             res.render('shop/transcendgrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -1948,6 +2039,8 @@ router.get('/grid-view-pricedesc', function (req, res, next) {
             });
             res.render('shop/gridview', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -2010,6 +2103,8 @@ router.get('/pricefilter-gridview-pricedesc', function (req, res, next) {
             });
             res.render('shop/gridview', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -2056,6 +2151,8 @@ router.get('/list-view-pricedesc', function (req, res, next) {
             });
             res.render('shop/listview', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -2119,6 +2216,8 @@ router.get('/pricefilter-listview-pricedesc', function (req, res, next) {
             });
             res.render('shop/listview', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -2168,6 +2267,8 @@ router.get('/apple-list-pricedesc', function (req, res, next) {
             });
             res.render('shop/apple', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -2232,6 +2333,8 @@ router.get('/pricefilter-applelist-pricedesc', function (req, res, next) {
             });
             res.render('shop/apple', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -2281,6 +2384,8 @@ router.get('/apple-grid-pricedesc', function (req, res, next) {
             });
             res.render('shop/applegrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -2345,6 +2450,8 @@ router.get('/pricefilter-applegrid-pricedesc', function (req, res, next) {
             });
             res.render('shop/applegrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -2394,6 +2501,8 @@ router.get('/dell-list-pricedesc', function (req, res, next) {
             });
             res.render('shop/dell', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -2458,6 +2567,8 @@ router.get('/pricefilter-delllist-pricedesc', function (req, res, next) {
             });
             res.render('shop/dell', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -2507,6 +2618,8 @@ router.get('/dell-grid-pricedesc', function (req, res, next) {
             });
             res.render('shop/dellgrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -2571,6 +2684,8 @@ router.get('/pricefilter-dellgrid-pricedesc', function (req, res, next) {
             });
             res.render('shop/dellgrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -2620,6 +2735,8 @@ router.get('/hp-list-pricedesc', function (req, res, next) {
             });
             res.render('shop/hp', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -2684,6 +2801,8 @@ router.get('/pricefilter-hplist-pricedesc', function (req, res, next) {
             });
             res.render('shop/hpgrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -2733,6 +2852,8 @@ router.get('/hp-grid-pricedesc', function (req, res, next) {
             });
             res.render('shop/hpgrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -2797,6 +2918,8 @@ router.get('/pricefilter-hpgrid-pricedesc', function (req, res, next) {
             });
             res.render('shop/hpgrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -2846,6 +2969,8 @@ router.get('/huawei-list-pricedesc', function (req, res, next) {
             });
             res.render('shop/huawei', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -2910,6 +3035,8 @@ router.get('/pricefilter-huaweilist-pricedesc', function (req, res, next) {
             });
             res.render('shop/huawei', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -2958,6 +3085,8 @@ router.get('/huaweigrid-pricedesc', function (req, res, next) {
             });
             res.render('shop/huaweigrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -3022,6 +3151,8 @@ router.get('/pricefilter-huaweigrid-pricedesc', function (req, res, next) {
             });
             res.render('shop/huaweigrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -3070,6 +3201,8 @@ router.get('/lenovo-list-pricedesc', function (req, res, next) {
             });
             res.render('shop/lenovo', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -3134,6 +3267,8 @@ router.get('/pricefilter-lenovolist-pricedesc', function (req, res, next) {
             });
             res.render('shop/lenovo', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -3182,6 +3317,8 @@ router.get('/lenovo-grid-pricedesc', function (req, res, next) {
             });
             res.render('shop/lenovogrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -3246,6 +3383,8 @@ router.get('/pricefilter-lenovogrid-pricedesc', function (req, res, next) {
             });
             res.render('shop/lenovogrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -3294,6 +3433,8 @@ router.get('/nokia-list-pricedesc', function (req, res, next) {
             });
             res.render('shop/nokia', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -3358,6 +3499,8 @@ router.get('/pricefilter-nokialist-pricedesc', function (req, res, next) {
             });
             res.render('shop/nokia', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -3406,6 +3549,8 @@ router.get('/nokia-grid-pricedesc', function (req, res, next) {
             });
             res.render('shop/nokiagrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -3470,6 +3615,8 @@ router.get('/pricefilter-nokiagrid-pricedesc', function (req, res, next) {
             });
             res.render('shop/nokiagrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -3517,6 +3664,8 @@ router.get('/samsung-list-pricedesc', function (req, res, next) {
             });
             res.render('shop/samsung', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -3581,6 +3730,8 @@ router.get('/pricefilter-samsunglist-pricedesc', function (req, res, next) {
             });
             res.render('shop/samsung', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -3629,6 +3780,8 @@ router.get('/samsung-grid-pricedesc', function (req, res, next) {
             });
             res.render('shop/samsunggrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -3693,6 +3846,8 @@ router.get('/pricefilter-samsunggrid-pricedesc', function (req, res, next) {
             });
             res.render('shop/samsunggrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -3741,6 +3896,8 @@ router.get('/transcend-list-pricedesc', function (req, res, next) {
             });
             res.render('shop/transcend', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -3805,6 +3962,8 @@ router.get('/pricefilter-transcendlist-pricedesc', function (req, res, next) {
             });
             res.render('shop/transcend', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -3853,6 +4012,8 @@ router.get('/transcend-grid-pricedesc', function (req, res, next) {
             });
             res.render('shop/transcend-grid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -3917,6 +4078,8 @@ router.get('/pricefilter-transcendgrid-pricedesc', function (req, res, next) {
             });
             res.render('shop/transcendgrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -3967,6 +4130,8 @@ router.get('/grid-view-priceasc', function (req, res, next) {
             });
             res.render('shop/gridview', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -4029,6 +4194,8 @@ router.get('/pricefilter-gridview-priceasc', function (req, res, next) {
             });
             res.render('shop/gridview', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -4093,6 +4260,8 @@ router.get('/pricefilter-listview-priceasc', function (req, res, next) {
             });
             res.render('shop/listview', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -4139,6 +4308,8 @@ router.get('/list-view-priceasc', function (req, res, next) {
             });
             res.render('shop/listview', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -4186,6 +4357,8 @@ router.get('/apple-list-priceasc', function (req, res, next) {
             });
             res.render('shop/apple', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -4250,6 +4423,8 @@ router.get('/pricefilter-applelist-priceasc', function (req, res, next) {
             });
             res.render('shop/apple', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -4298,6 +4473,8 @@ router.get('/apple-grid-priceasc', function (req, res, next) {
             });
             res.render('shop/applegrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -4362,6 +4539,8 @@ router.get('/pricefilter-applegrid-priceasc', function (req, res, next) {
             });
             res.render('shop/applegrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -4410,6 +4589,8 @@ router.get('/dell-list-priceasc', function (req, res, next) {
             });
             res.render('shop/dell', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -4474,6 +4655,8 @@ router.get('/pricefilter-delllist-priceasc', function (req, res, next) {
             });
             res.render('shop/dell', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -4522,6 +4705,8 @@ router.get('/dell-grid-priceasc', function (req, res, next) {
             });
             res.render('shop/dellgrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -4586,6 +4771,8 @@ router.get('/pricefilter-dellgrid-priceasc', function (req, res, next) {
             });
             res.render('shop/dellgrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -4634,6 +4821,8 @@ router.get('/hp-list-priceasc', function (req, res, next) {
             });
             res.render('shop/hp', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -4698,6 +4887,8 @@ router.get('/pricefilter-hplist-priceasc', function (req, res, next) {
             });
             res.render('shop/hp', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -4746,6 +4937,8 @@ router.get('/hp-grid-priceasc', function (req, res, next) {
             });
             res.render('shop/hpgrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -4810,6 +5003,8 @@ router.get('/pricefilter-hpgrid-priceasc', function (req, res, next) {
             });
             res.render('shop/hpgrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -4858,6 +5053,8 @@ router.get('/huawei-list-priceasc', function (req, res, next) {
             });
             res.render('shop/huawei', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -4922,6 +5119,8 @@ router.get('/pricefilter-huaweilist-priceasc', function (req, res, next) {
             });
             res.render('shop/huawei', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -4970,6 +5169,8 @@ router.get('/huawei-grid-priceasc', function (req, res, next) {
             });
             res.render('shop/huaweigrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -5034,6 +5235,8 @@ router.get('/pricefilter-huaweigrid-priceasc', function (req, res, next) {
             });
             res.render('shop/huaweigrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -5082,6 +5285,8 @@ router.get('/lenovo-list-priceasc', function (req, res, next) {
             });
             res.render('shop/lenovo', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -5146,6 +5351,8 @@ router.get('/pricefilter-lenovolist-priceasc', function (req, res, next) {
             });
             res.render('shop/lenovo', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -5194,6 +5401,8 @@ router.get('/lenovo-grid-priceasc', function (req, res, next) {
             });
             res.render('shop/lenovogrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -5258,6 +5467,8 @@ router.get('/pricefilter-lenovogrid-priceasc', function (req, res, next) {
             });
             res.render('shop/lenovogrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -5306,6 +5517,8 @@ router.get('/nokia-list-priceasc', function (req, res, next) {
             });
             res.render('shop/nokia', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -5370,6 +5583,8 @@ router.get('/pricefilter-nokialist-priceasc', function (req, res, next) {
             });
             res.render('shop/nokia', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -5418,6 +5633,8 @@ router.get('/nokia-grid-priceasc', function (req, res, next) {
             });
             res.render('shop/nokiagrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -5482,6 +5699,8 @@ router.get('/pricefilter-nokiagrid-priceasc', function (req, res, next) {
             });
             res.render('shop/nokiagrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -5530,6 +5749,8 @@ router.get('/samsung-list-priceasc', function (req, res, next) {
             });
             res.render('shop/samsung', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -5594,6 +5815,8 @@ router.get('/pricefilter-samsunglist-priceasc', function (req, res, next) {
             });
             res.render('shop/samsung', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -5642,6 +5865,8 @@ router.get('/samsung-grid-priceasc', function (req, res, next) {
             });
             res.render('shop/samsunggrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -5706,6 +5931,8 @@ router.get('/pricefilter-samsunggrid-priceasc', function (req, res, next) {
             });
             res.render('shop/samsunggrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -5754,6 +5981,8 @@ router.get('/transcend-list-priceasc', function (req, res, next) {
             });
             res.render('shop/transcend', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -5818,6 +6047,8 @@ router.get('/pricefilter-transcendlist-priceasc', function (req, res, next) {
             });
             res.render('shop/transcend', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -5866,6 +6097,8 @@ router.get('/transcend-grid-priceasc', function (req, res, next) {
             });
             res.render('shop/transcend-grid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -5930,6 +6163,8 @@ router.get('/pricefilter-transcendgrid-priceasc', function (req, res, next) {
             });
             res.render('shop/transcendgrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -5979,6 +6214,8 @@ router.get('/grid-view-namedesc', function (req, res, next) {
             });
             res.render('shop/gridview', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -6041,6 +6278,8 @@ router.get('/pricefilter-gridview-namedesc', function (req, res, next) {
             });
             res.render('shop/gridview', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -6087,6 +6326,8 @@ router.get('/list-view-namedesc', function (req, res, next) {
             });
             res.render('shop/listview', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -6150,6 +6391,8 @@ router.get('/pricefilter-list-namedesc', function (req, res, next) {
             });
             res.render('shop/listview', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -6198,6 +6441,8 @@ router.get('/apple-list-namedesc', function (req, res, next) {
             });
             res.render('shop/apple', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -6262,6 +6507,8 @@ router.get('/pricefilter-applelist-namedesc', function (req, res, next) {
             });
             res.render('shop/apple', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -6310,6 +6557,8 @@ router.get('/apple-grid-namedesc', function (req, res, next) {
             });
             res.render('shop/applegrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -6374,6 +6623,8 @@ router.get('/pricefilter-applegrid-namedesc', function (req, res, next) {
             });
             res.render('shop/applegrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -6422,6 +6673,8 @@ router.get('/dell-list-namedesc', function (req, res, next) {
             });
             res.render('shop/dell', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -6486,6 +6739,8 @@ router.get('/pricefilter-delllist-namedesc', function (req, res, next) {
             });
             res.render('shop/dell', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -6534,6 +6789,8 @@ router.get('/dell-grid-namedesc', function (req, res, next) {
             });
             res.render('shop/dellgrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -6598,6 +6855,8 @@ router.get('/pricefilter-dellgrid-namedesc', function (req, res, next) {
             });
             res.render('shop/dellgrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -6646,6 +6905,8 @@ router.get('/hp-list-namedesc', function (req, res, next) {
             });
             res.render('shop/hp', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -6710,6 +6971,8 @@ router.get('/pricefilter-hplist-namedesc', function (req, res, next) {
             });
             res.render('shop/hp', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -6758,6 +7021,8 @@ router.get('/hp-grid-namedesc', function (req, res, next) {
             });
             res.render('shop/hpgrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -6822,6 +7087,8 @@ router.get('/pricefilter-hpgrid-namedesc', function (req, res, next) {
             });
             res.render('shop/hpgrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -6870,6 +7137,8 @@ router.get('/huawei-list-namedesc', function (req, res, next) {
             });
             res.render('shop/huawei', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -6934,6 +7203,8 @@ router.get('/pricefilter-huaweilist-namedesc', function (req, res, next) {
             });
             res.render('shop/huawei', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -6982,6 +7253,8 @@ router.get('/huawei-grid-namedesc', function (req, res, next) {
             });
             res.render('shop/huaweigrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -7046,6 +7319,8 @@ router.get('/pricefilter-huaweigrid-namedesc', function (req, res, next) {
             });
             res.render('shop/huaweigrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -7094,6 +7369,8 @@ router.get('/lenovo-list-namedesc', function (req, res, next) {
             });
             res.render('shop/lenovo', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -7158,6 +7435,8 @@ router.get('/pricefilter-lenovolist-namedesc', function (req, res, next) {
             });
             res.render('shop/lenovo', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -7206,6 +7485,8 @@ router.get('/lenovo-grid-namedesc', function (req, res, next) {
             });
             res.render('shop/lenovogrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -7270,6 +7551,8 @@ router.get('/pricefilter-lenovogrid-namedesc', function (req, res, next) {
             });
             res.render('shop/lenovogrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -7318,6 +7601,8 @@ router.get('/nokia-list-namedesc', function (req, res, next) {
             });
             res.render('shop/nokia', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -7382,6 +7667,8 @@ router.get('/pricefilter-nokialist-namedesc', function (req, res, next) {
             });
             res.render('shop/nokia', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -7430,6 +7717,8 @@ router.get('/nokia-grid-namedesc', function (req, res, next) {
             });
             res.render('shop/nokiagrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -7494,6 +7783,8 @@ router.get('/pricefilter-nokiagrid-namedesc', function (req, res, next) {
             });
             res.render('shop/nokiagrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -7542,6 +7833,8 @@ router.get('/samsung-list-namedesc', function (req, res, next) {
             });
             res.render('shop/samsung', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -7606,6 +7899,8 @@ router.get('/pricefilter-samsunglist-namedesc', function (req, res, next) {
             });
             res.render('shop/samsung', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -7654,6 +7949,8 @@ router.get('/samsung-grid-namedesc', function (req, res, next) {
             });
             res.render('shop/samsunggrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -7718,6 +8015,8 @@ router.get('/pricefilter-samsunggrid-namedesc', function (req, res, next) {
             });
             res.render('shop/samsunggrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -7766,6 +8065,8 @@ router.get('/transcend-list-namedesc', function (req, res, next) {
             });
             res.render('shop/transcend', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -7830,6 +8131,8 @@ router.get('/pricefilter-transcendlist-namedesc', function (req, res, next) {
             });
             res.render('shop/transcend', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -7878,6 +8181,8 @@ router.get('/transcend-grid-namedesc', function (req, res, next) {
             });
             res.render('shop/transcend-grid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -7942,6 +8247,8 @@ router.get('/pricefilter-transcendgrid-namedesc', function (req, res, next) {
             });
             res.render('shop/transcendgrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -7993,6 +8300,8 @@ router.get('/grid-view-nameasc', function (req, res, next) {
             });
             res.render('shop/gridview', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -8055,6 +8364,8 @@ router.get('/pricefilter-gridview-nameasc', function (req, res, next) {
             });
             res.render('shop/gridview', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -8101,6 +8412,8 @@ router.get('/list-view-nameasc', function (req, res, next) {
             });
             res.render('shop/listview', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -8164,6 +8477,8 @@ router.get('/pricefilter-listview-nameasc', function (req, res, next) {
             });
             res.render('shop/listview', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -8212,6 +8527,8 @@ router.get('/apple-list-nameasc', function (req, res, next) {
             });
             res.render('shop/apple', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -8276,6 +8593,8 @@ router.get('/pricefilter-applelist-nameasc', function (req, res, next) {
             });
             res.render('shop/apple', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -8324,6 +8643,8 @@ router.get('/apple-grid-nameasc', function (req, res, next) {
             });
             res.render('shop/applegrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -8388,6 +8709,8 @@ router.get('/pricefilter-applegrid-nameasc', function (req, res, next) {
             });
             res.render('shop/applegrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -8436,6 +8759,8 @@ router.get('/dell-list-nameasc', function (req, res, next) {
             });
             res.render('shop/dell', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -8500,6 +8825,8 @@ router.get('/pricefilter-delllist-nameasc', function (req, res, next) {
             });
             res.render('shop/dell', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -8548,6 +8875,8 @@ router.get('/dell-grid-nameasc', function (req, res, next) {
             });
             res.render('shop/dellgrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -8612,6 +8941,8 @@ router.get('/pricefilter-dellgrid-nameasc', function (req, res, next) {
             });
             res.render('shop/dellgrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -8660,6 +8991,8 @@ router.get('/hp-list-nameasc', function (req, res, next) {
             });
             res.render('shop/hp', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -8724,6 +9057,8 @@ router.get('/pricefilter-hplist-nameasc', function (req, res, next) {
             });
             res.render('shop/hp', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -8772,6 +9107,8 @@ router.get('/hp-grid-nameasc', function (req, res, next) {
             });
             res.render('shop/hpgrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -8836,6 +9173,8 @@ router.get('/pricefilter-hpgrid-nameasc', function (req, res, next) {
             });
             res.render('shop/hpgrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -8884,6 +9223,8 @@ router.get('/huawei-list-nameasc', function (req, res, next) {
             });
             res.render('shop/huawei', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -8948,6 +9289,8 @@ router.get('/pricefilter-huaweilist-nameasc', function (req, res, next) {
             });
             res.render('shop/huawei', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -8996,6 +9339,8 @@ router.get('/huawei-grid-nameasc', function (req, res, next) {
             });
             res.render('shop/huaweigrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -9060,6 +9405,8 @@ router.get('/pricefilter-huaweigrid-nameasc', function (req, res, next) {
             });
             res.render('shop/huaweigrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -9108,6 +9455,8 @@ router.get('/lenovo-list-nameasc', function (req, res, next) {
             });
             res.render('shop/lenovo', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -9171,6 +9520,8 @@ router.get('/pricefilter-lenovolist-nameasc', function (req, res, next) {
             });
             res.render('shop/lenovo', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -9219,6 +9570,8 @@ router.get('/lenovo-grid-nameasc', function (req, res, next) {
             });
             res.render('shop/lenovogrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -9283,6 +9636,8 @@ router.get('/pricefilter-lenovogrid-nameasc', function (req, res, next) {
             });
             res.render('shop/lenovogrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -9331,6 +9686,8 @@ router.get('/nokia-list-nameasc', function (req, res, next) {
             });
             res.render('shop/nokia', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -9395,6 +9752,8 @@ router.get('/pricefilter-nokialist-nameasc', function (req, res, next) {
             });
             res.render('shop/nokia', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -9443,6 +9802,8 @@ router.get('/nokia-grid-nameasc', function (req, res, next) {
             });
             res.render('shop/nokiagrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -9507,6 +9868,8 @@ router.get('/pricefilter-nokiagrid-nameasc', function (req, res, next) {
             });
             res.render('shop/nokiagrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -9555,6 +9918,8 @@ router.get('/samsung-list-nameasc', function (req, res, next) {
             });
             res.render('shop/samsung', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -9619,6 +9984,8 @@ router.get('/pricefilter-samsunglist-nameasc', function (req, res, next) {
             });
             res.render('shop/samsung', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -9667,6 +10034,8 @@ router.get('/samsung-grid-nameasc', function (req, res, next) {
             });
             res.render('shop/samsunggrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -9731,6 +10100,8 @@ router.get('/pricefilter-samsunggrid-nameasc', function (req, res, next) {
             });
             res.render('shop/samsunggrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -9779,6 +10150,8 @@ router.get('/transcend-list-nameasc', function (req, res, next) {
             });
             res.render('shop/transcend', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -9843,6 +10216,8 @@ router.get('/pricefilter-transcendlist-nameasc', function (req, res, next) {
             });
             res.render('shop/transcend', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -9891,6 +10266,8 @@ router.get('/transcend-grid-nameasc', function (req, res, next) {
             });
             res.render('shop/transcend-grid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -9955,6 +10332,8 @@ router.get('/pricefilter-transcendgrid-nameasc', function (req, res, next) {
             });
             res.render('shop/transcendgrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -10006,6 +10385,8 @@ router.get('/laptop-grid-view', function (req, res, next) {
             });
             res.render('shop/gridview_laptop', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -10066,6 +10447,8 @@ router.get('/pricefilter-laptop-gridview', function (req, res, next) {
             });
             res.render('shop/gridview_laptop', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -10112,6 +10495,8 @@ router.get('/laptop-list-view', function (req, res, next) {
             });
             res.render('shop/listview_laptop', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -10173,6 +10558,8 @@ router.get('/pricefilter-laptop-listview', function (req, res, next) {
             });
             res.render('shop/listview_laptop', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -10220,6 +10607,8 @@ router.get('/apple-laptop-list', function (req, res, next) {
             });
             res.render('shop/apple_laptop', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -10282,6 +10671,8 @@ router.get('/pricefilter-apple-laptoplist', function (req, res, next) {
             });
             res.render('shop/apple_laptop', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -10329,6 +10720,8 @@ router.get('/apple-laptop-grid', function (req, res, next) {
             });
             res.render('shop/apple_laptopgrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -10391,6 +10784,8 @@ router.get('/pricefilter-apple-laptopgrid', function (req, res, next) {
             });
             res.render('shop/apple_laptopgrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -10438,6 +10833,8 @@ router.get('/dell-laptop-list', function (req, res, next) {
             });
             res.render('shop/dell_laptop', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -10500,6 +10897,8 @@ router.get('/pricefilter-dell-laptoplist', function (req, res, next) {
             });
             res.render('shop/dell_laptop', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -10547,6 +10946,8 @@ router.get('/dell-laptop-grid', function (req, res, next) {
             });
             res.render('shop/dell_laptopgrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -10609,6 +11010,8 @@ router.get('/pricefilter-dell-laptopgrid', function (req, res, next) {
             });
             res.render('shop/dell_laptopgrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -10656,6 +11059,8 @@ router.get('/hp-laptop-list', function (req, res, next) {
             });
             res.render('shop/hp_laptop', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -10718,6 +11123,8 @@ router.get('/pricefilter-hp-laptoplist', function (req, res, next) {
             });
             res.render('shop/hp_laptop', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -10765,6 +11172,8 @@ router.get('/hp-laptop-grid', function (req, res, next) {
             });
             res.render('shop/hp_laptopgrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -10827,6 +11236,8 @@ router.get('/pricefilter-hp-laptopgrid', function (req, res, next) {
             });
             res.render('shop/hp_laptopgrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -10874,6 +11285,8 @@ router.get('/lenovo-laptop-list', function (req, res, next) {
             });
             res.render('shop/lenovo_laptop', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -10935,6 +11348,8 @@ router.get('/pricefilter-lenovo-laptoplist', function (req, res, next) {
             });
             res.render('shop/lenovo_laptop', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -10982,6 +11397,8 @@ router.get('/lenovo-laptop-grid', function (req, res, next) {
             });
             res.render('shop/lenovo_laptopgrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -11044,6 +11461,8 @@ router.get('/pricefilter-lenovo-laptopgrid', function (req, res, next) {
             });
             res.render('shop/lenovo_laptopgrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -11091,6 +11510,8 @@ router.get('/samsung-laptop-list', function (req, res, next) {
             });
             res.render('shop/samsung_laptop', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -11153,6 +11574,8 @@ router.get('/pricefilter-samsung-laptoplist', function (req, res, next) {
             });
             res.render('shop/samsung_laptop', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -11200,6 +11623,8 @@ router.get('/samsung-laptop-grid', function (req, res, next) {
             });
             res.render('shop/samsung_laptopgrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -11262,6 +11687,8 @@ router.get('/pricefilter-samsung-laptopgrid', function (req, res, next) {
             });
             res.render('shop/samsung_laptopgrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -11313,6 +11740,8 @@ router.get('/laptop-grid-view-pricedesc', function (req, res, next) {
             });
             res.render('shop/gridview_laptop', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -11376,6 +11805,8 @@ router.get('/pricefilter-laptop-gridview-pricedesc', function (req, res, next) {
             });
             res.render('shop/gridview_laptop', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -11424,6 +11855,8 @@ router.get('/laptop-list-view-pricedesc', function (req, res, next) {
             });
             res.render('shop/listview_laptop', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -11488,6 +11921,8 @@ router.get('/pricefilter-laptop-listview-pricedesc', function (req, res, next) {
             });
             res.render('shop/listview_laptop', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -11537,6 +11972,8 @@ router.get('/apple-laptop-list-pricedesc', function (req, res, next) {
             });
             res.render('shop/apple_laptop', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -11602,6 +12039,8 @@ router.get('/pricefilter-apple-laptoplist-pricedesc', function (req, res, next) 
             });
             res.render('shop/apple_laptop', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -11651,6 +12090,8 @@ router.get('/apple-laptop-grid-pricedesc', function (req, res, next) {
             });
             res.render('shop/apple_laptopgrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -11716,6 +12157,8 @@ router.get('/pricefilter-apple-laptopgrid-pricedesc', function (req, res, next) 
             });
             res.render('shop/apple_laptopgrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -11765,6 +12208,8 @@ router.get('/dell-laptop-list-pricedesc', function (req, res, next) {
             });
             res.render('shop/dell_laptop', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -11830,6 +12275,8 @@ router.get('/pricefilter-dell-laptoplist-pricedesc', function (req, res, next) {
             });
             res.render('shop/dell_laptop', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -11879,6 +12326,8 @@ router.get('/dell-laptop-grid-pricedesc', function (req, res, next) {
             });
             res.render('shop/dell_laptopgrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -11944,6 +12393,8 @@ router.get('/pricefilter-dell-laptopgrid-pricedesc', function (req, res, next) {
             });
             res.render('shop/dell_laptopgrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -11993,6 +12444,8 @@ router.get('/hp-laptop-list-pricedesc', function (req, res, next) {
             });
             res.render('shop/hp_laptop', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -12058,6 +12511,8 @@ router.get('/pricefilter-hp-laptoplist-pricedesc', function (req, res, next) {
             });
             res.render('shop/dell_laptop', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -12106,6 +12561,8 @@ router.get('/hp-laptop-grid-pricedesc', function (req, res, next) {
             });
             res.render('shop/hp_laptopgrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -12171,6 +12628,8 @@ router.get('/pricefilter-hp-laptopgrid-pricedesc', function (req, res, next) {
             });
             res.render('shop/hp_laptopgrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -12220,6 +12679,8 @@ router.get('/lenovo-laptop-list-pricedesc', function (req, res, next) {
             });
             res.render('shop/lenovo_laptop', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -12285,6 +12746,8 @@ router.get('/pricefilter-lenovo-laptoplist-pricedesc', function (req, res, next)
             });
             res.render('shop/lenovo_laptop', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -12334,6 +12797,8 @@ router.get('/lenovo-laptop-grid-pricedesc', function (req, res, next) {
             });
             res.render('shop/lenovo_laptopgrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -12399,6 +12864,8 @@ router.get('/pricefilter-lenovo-laptopgrid-pricedesc', function (req, res, next)
             });
             res.render('shop/lenovo_laptopgrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -12448,6 +12915,8 @@ router.get('/samsung-laptop-list-pricedesc', function (req, res, next) {
             });
             res.render('shop/samsung_laptop', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -12513,6 +12982,8 @@ router.get('/pricefilter-samsung-laptoplist-pricedesc', function (req, res, next
             });
             res.render('shop/samsung_laptop', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -12562,6 +13033,8 @@ router.get('/samsung-laptop-grid-pricedesc', function (req, res, next) {
             });
             res.render('shop/samsung_laptopgrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -12627,6 +13100,8 @@ router.get('/pricefilter-samsung-laptopgrid-pricedesc', function (req, res, next
             });
             res.render('shop/samsung_laptopgrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -12677,6 +13152,8 @@ router.get('/laptop-grid-view-priceasc', function (req, res, next) {
             });
             res.render('shop/gridview_laptop', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -12740,6 +13217,8 @@ router.get('/pricefilter-gridvew-laptop-priceasc', function (req, res, next) {
             });
             res.render('shop/gridview_laptop', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -12788,6 +13267,8 @@ router.get('/laptop-list-view-priceasc', function (req, res, next) {
             });
             res.render('shop/listview_laptop', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -12852,6 +13333,8 @@ router.get('/pricefilter-listview-laptop-priceasc', function (req, res, next) {
             });
             res.render('shop/listview_laptop', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -12901,6 +13384,8 @@ router.get('/apple-laptop-list-priceasc', function (req, res, next) {
             });
             res.render('shop/apple_laptop', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -12966,6 +13451,8 @@ router.get('/pricefilter-apple-laptoplist-priceasc', function (req, res, next) {
             });
             res.render('shop/apple_laptop', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -13015,6 +13502,8 @@ router.get('/apple-laptop-grid-priceasc', function (req, res, next) {
             });
             res.render('shop/apple_laptopgrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -13080,6 +13569,8 @@ router.get('/pricefilter-apple-laptopgrid-priceasc', function (req, res, next) {
             });
             res.render('shop/apple_laptopgrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -13129,6 +13620,8 @@ router.get('/dell-laptop-list-priceasc', function (req, res, next) {
             });
             res.render('shop/dell_laptop', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -13194,6 +13687,8 @@ router.get('/pricefilter-dell-laptoplist-priceasc', function (req, res, next) {
             });
             res.render('shop/dell_laptop', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -13243,6 +13738,8 @@ router.get('/dell-laptop-grid-priceasc', function (req, res, next) {
             });
             res.render('shop/dell_laptopgrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -13308,6 +13805,8 @@ router.get('/pricefilter-dell-laptopgrid-priceasc', function (req, res, next) {
             });
             res.render('shop/dell_laptopgrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -13357,6 +13856,8 @@ router.get('/hp-laptop-list-priceasc', function (req, res, next) {
             });
             res.render('shop/hp_laptop', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -13422,6 +13923,8 @@ router.get('/pricefilter-hp-laptoplist-priceasc', function (req, res, next) {
             });
             res.render('shop/hp_laptop', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -13471,6 +13974,8 @@ router.get('/hp-laptop-grid-priceasc', function (req, res, next) {
             });
             res.render('shop/hp_laptopgrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -13536,6 +14041,8 @@ router.get('/pricefilter-hp-laptopgrid-priceasc', function (req, res, next) {
             });
             res.render('shop/hp_laptopgrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -13585,6 +14092,8 @@ router.get('/lenovo-laptop-list-priceasc', function (req, res, next) {
             });
             res.render('shop/lenovo_laptop', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -13650,6 +14159,8 @@ router.get('/pricefilter-lenovo-laptoplist-priceasc', function (req, res, next) 
             });
             res.render('shop/lenovo_laptop', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -13699,6 +14210,8 @@ router.get('/lenovo-laptop-grid-priceasc', function (req, res, next) {
             });
             res.render('shop/lenovo_laptopgrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -13764,6 +14277,8 @@ router.get('/pricefilter-lenovo-laptopgrid-priceasc', function (req, res, next) 
             });
             res.render('shop/lenovo_laptopgrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -13813,6 +14328,8 @@ router.get('/samsung-laptop-list-priceasc', function (req, res, next) {
             });
             res.render('shop/samsung_laptop', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -13878,6 +14395,8 @@ router.get('/pricefilter-samsung-laptopgrid-priceasc', function (req, res, next)
             });
             res.render('shop/samsung_laptop', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -13927,6 +14446,8 @@ router.get('/samsung-laptop-grid-priceasc', function (req, res, next) {
             });
             res.render('shop/samsung_laptopgrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -13992,6 +14513,8 @@ router.get('/pricefilter-samsung-laptopgrid-pricedesc', function (req, res, next
             });
             res.render('shop/samsung_laptopgrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -14043,6 +14566,8 @@ router.get('/laptop-grid-view-namedesc', function (req, res, next) {
             });
             res.render('shop/gridview_laptop', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -14106,6 +14631,8 @@ router.get('/pricefilter-laptop_gridview-namedesc', function (req, res, next) {
             });
             res.render('shop/gridview_laptop', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -14154,6 +14681,8 @@ router.get('/laptop-list-view-namedesc', function (req, res, next) {
             });
             res.render('shop/listview_laptop', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -14218,6 +14747,8 @@ router.get('/pricefilter-laptop_listview-namedesc', function (req, res, next) {
             });
             res.render('shop/listview_laptop', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -14267,6 +14798,8 @@ router.get('/apple-laptop-list-namedesc', function (req, res, next) {
             });
             res.render('shop/apple_laptop', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -14332,6 +14865,8 @@ router.get('/pricefilter-apple-laptoplist-namedesc', function (req, res, next) {
             });
             res.render('shop/apple_laptop', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -14381,6 +14916,8 @@ router.get('/apple-laptop-grid-namedesc', function (req, res, next) {
             });
             res.render('shop/apple_laptopgrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -14446,6 +14983,8 @@ router.get('/pricefilter-apple-laptopgrid-namedesc', function (req, res, next) {
             });
             res.render('shop/apple_laptopgrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -14495,6 +15034,8 @@ router.get('/dell-laptop-list-namedesc', function (req, res, next) {
             });
             res.render('shop/dell_laptop', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -14560,6 +15101,8 @@ router.get('/pricefilter-dell-laptoplist-namedesc', function (req, res, next) {
             });
             res.render('shop/dell_laptop', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -14609,6 +15152,8 @@ router.get('/dell-laptop-grid-namedesc', function (req, res, next) {
             });
             res.render('shop/dell_laptopgrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -14674,6 +15219,8 @@ router.get('/pricefilter-dell-laptopgrid-namedesc', function (req, res, next) {
             });
             res.render('shop/dell_laptopgrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -14723,6 +15270,8 @@ router.get('/hp-laptop-list-namedesc', function (req, res, next) {
             });
             res.render('shop/hp_laptop', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -14788,6 +15337,8 @@ router.get('/pricefilter-hp-laptoplist-namedesc', function (req, res, next) {
             });
             res.render('shop/hp_laptop', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -14837,6 +15388,8 @@ router.get('/hp-laptop-grid-namedesc', function (req, res, next) {
             });
             res.render('shop/hp_laptopgrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -14902,6 +15455,8 @@ router.get('/pricefilter-hp-laptopgrid-namedesc', function (req, res, next) {
             });
             res.render('shop/hp_laptopgrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -14951,6 +15506,8 @@ router.get('/lenovo-laptop-list-namedesc', function (req, res, next) {
             });
             res.render('shop/lenovo_laptop', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -15016,6 +15573,8 @@ router.get('/pricefilter-lenovo-laptoplist-namedesc', function (req, res, next) 
             });
             res.render('shop/lenovo_laptop', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -15065,6 +15624,8 @@ router.get('/lenovo-laptop-grid-namedesc', function (req, res, next) {
             });
             res.render('shop/lenovo_laptopgrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -15130,6 +15691,8 @@ router.get('/pricefilter-lenovo-laptopgrid-namedesc', function (req, res, next) 
             });
             res.render('shop/lenovo_laptopgrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -15179,6 +15742,8 @@ router.get('/samsung-laptop-list-namedesc', function (req, res, next) {
             });
             res.render('shop/samsung_laptop', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -15244,6 +15809,8 @@ router.get('/pricefilter-samsung-laptoplist-namedesc', function (req, res, next)
             });
             res.render('shop/samsung_laptop', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -15293,6 +15860,8 @@ router.get('/samsung-laptop-grid-namedesc', function (req, res, next) {
             });
             res.render('shop/samsung_laptopgrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -15358,6 +15927,8 @@ router.get('/pricefilter-samsung-laptopgrid-namedesc', function (req, res, next)
             });
             res.render('shop/samsung_laptopgrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -15408,6 +15979,8 @@ router.get('/laptop-grid-view-nameasc', function (req, res, next) {
             });
             res.render('shop/gridview_laptop', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -15471,6 +16044,8 @@ router.get('/pricefilter-gridview-laptop-nameasc', function (req, res, next) {
             });
             res.render('shop/gridview_laptop', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -15519,6 +16094,8 @@ router.get('/laptop-list-view-nameasc', function (req, res, next) {
             });
             res.render('shop/listview_laptop', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -15583,6 +16160,8 @@ router.get('/pricefilter-listview-laptop-nameasc', function (req, res, next) {
             });
             res.render('shop/listview_laptop', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -15632,6 +16211,8 @@ router.get('/apple-laptop-list-nameasc', function (req, res, next) {
             });
             res.render('shop/apple_laptop', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -15697,6 +16278,8 @@ router.get('/pricefilter-apple-laptoplist-nameasc', function (req, res, next) {
             });
             res.render('shop/apple_laptop', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -15746,6 +16329,8 @@ router.get('/apple-laptop-grid-nameasc', function (req, res, next) {
             });
             res.render('shop/apple_laptopgrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -15811,6 +16396,8 @@ router.get('/pricefilter-apple-laptopgrid-nameasc', function (req, res, next) {
             });
             res.render('shop/apple_laptopgrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -15860,6 +16447,8 @@ router.get('/dell-laptop-list-nameasc', function (req, res, next) {
             });
             res.render('shop/dell_laptop', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -15925,6 +16514,8 @@ router.get('/pricefilter-dell-laptoplist-nameasc', function (req, res, next) {
             });
             res.render('shop/dell_laptopgrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -15974,6 +16565,8 @@ router.get('/dell-laptop-grid-nameasc', function (req, res, next) {
             });
             res.render('shop/dell_laptopgrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -16039,6 +16632,8 @@ router.get('/pricefilter-dell-laptopgrid-nameasc', function (req, res, next) {
             });
             res.render('shop/dell_laptopgrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -16088,6 +16683,8 @@ router.get('/hp-laptop-list-nameasc', function (req, res, next) {
             });
             res.render('shop/hp_laptop', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -16153,6 +16750,8 @@ router.get('/pricefilter-hp-laptoplist-nameasc', function (req, res, next) {
             });
             res.render('shop/hp_laptop', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -16202,6 +16801,8 @@ router.get('/hp-laptop-grid-nameasc', function (req, res, next) {
             });
             res.render('shop/hp_laptopgrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -16267,6 +16868,8 @@ router.get('/pricefilter-hp-laptopgrid-nameasc', function (req, res, next) {
             });
             res.render('shop/hp_laptopgrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -16316,6 +16919,8 @@ router.get('/lenovo-laptop-list-nameasc', function (req, res, next) {
             });
             res.render('shop/lenovo_laptop', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -16381,6 +16986,8 @@ router.get('/pricefilter-lenovo-laptoplist-nameasc', function (req, res, next) {
             });
             res.render('shop/lenovo_laptop', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -16430,6 +17037,8 @@ router.get('/lenovo-laptop-grid-nameasc', function (req, res, next) {
             });
             res.render('shop/lenovo_laptopgrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -16495,6 +17104,8 @@ router.get('/pricefilter-lenovo-laptopgrid-nameasc', function (req, res, next) {
             });
             res.render('shop/lenovo_laptopgrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -16544,6 +17155,8 @@ router.get('/samsung-laptop-list-nameasc', function (req, res, next) {
             });
             res.render('shop/samsung_laptop', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -16609,6 +17222,8 @@ router.get('/pricefilter-samsung-laptoplist-nameasc', function (req, res, next) 
             });
             res.render('shop/samsung_laptop', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -16658,6 +17273,8 @@ router.get('/samsung-laptop-grid-nameasc', function (req, res, next) {
             });
             res.render('shop/samsung_laptopgrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -16723,6 +17340,8 @@ router.get('/pricefilter-samsung-laptopgrid-nameasc', function (req, res, next) 
             });
             res.render('shop/samsung_laptopgrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -16771,6 +17390,8 @@ router.get('/mobile-grid-view', function (req, res, next) {
             });
             res.render('shop/gridview_mobile', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -16825,6 +17446,8 @@ router.get('/mobile-list-view', function (req, res, next) {
             });
             res.render('shop/listview_mobile', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -16873,6 +17496,8 @@ router.get('/apple-mobile-list', function (req, res, next) {
             });
             res.render('shop/apple_mobile', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -16918,6 +17543,8 @@ router.get('/apple-mobile-grid', function (req, res, next) {
             });
             res.render('shop/apple_mobilegrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -16963,6 +17590,8 @@ router.get('/huawei-mobile-list', function (req, res, next) {
             });
             res.render('shop/huawei_mobile', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -17008,6 +17637,8 @@ router.get('/huawei-mobile-grid', function (req, res, next) {
             });
             res.render('shop/huawei_mobilegrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -17053,6 +17684,8 @@ router.get('/nokia-mobile-list', function (req, res, next) {
             });
             res.render('shop/nokia', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -17098,6 +17731,8 @@ router.get('/nokia-mobile-grid', function (req, res, next) {
             });
             res.render('shop/nokia_mobilegrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -17143,6 +17778,8 @@ router.get('/samsung-mobile-list', function (req, res, next) {
             });
             res.render('shop/samsung_mobile', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -17188,6 +17825,8 @@ router.get('/samsung-mobile-grid', function (req, res, next) {
             });
             res.render('shop/samsung_mobilegrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -17232,6 +17871,8 @@ router.get('/pricefilter-mobile-gridview', function (req, res, next) {
             });
             res.render('shop/gridview_mobile', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -17292,6 +17933,8 @@ router.get('/pricefilter-mobile-listview', function (req, res, next) {
             });
             res.render('shop/listview_mobile', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -17356,6 +17999,8 @@ router.get('/pricefilter-apple-mobilelist', function (req, res, next) {
             });
             res.render('shop/apple_mobile', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -17421,6 +18066,8 @@ router.get('/pricefilter-apple-mobilegrid', function (req, res, next) {
             });
             res.render('shop/apple_mobilegrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -17486,6 +18133,8 @@ router.get('/pricefilter-huawei-mobilelist', function (req, res, next) {
             });
             res.render('shop/huawei_mobile', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -17551,6 +18200,8 @@ router.get('/pricefilter-huawei-mobilegrid', function (req, res, next) {
             });
             res.render('shop/huawei_mobilegrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -17616,6 +18267,8 @@ router.get('/pricefilter-nokia-mobilelist', function (req, res, next) {
             });
             res.render('shop/nokia', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -17678,6 +18331,8 @@ router.get('/pricefilter-nokia-mobilegrid', function (req, res, next) {
             });
             res.render('shop/nokia_mobilegrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -17743,6 +18398,8 @@ router.get('/pricefilter-samsung-mobilelist', function (req, res, next) {
             });
             res.render('shop/samsung_mobile', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -17805,6 +18462,8 @@ router.get('/pricefilter-samsung-mobilegrid', function (req, res, next) {
             });
             res.render('shop/samsung_mobilegrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -17853,6 +18512,8 @@ router.get('/mobile-grid-view-priceasc', function (req, res, next) {
             });
             res.render('shop/gridview_mobile', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -17899,6 +18560,8 @@ router.get('/mobile-list-view-priceasc', function (req, res, next) {
             });
             res.render('shop/listview_mobile', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -17946,6 +18609,8 @@ router.get('/apple-mobile-list-priceasc', function (req, res, next) {
             });
             res.render('shop/apple_mobile', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -17994,6 +18659,8 @@ router.get('/apple-mobile-grid-priceasc', function (req, res, next) {
             });
             res.render('shop/apple_mobilegrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -18042,6 +18709,8 @@ router.get('/huawei-mobilelist-priceasc', function (req, res, next) {
             });
             res.render('shop/huawei_mobile', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -18090,6 +18759,8 @@ router.get('/huawei-mobile-grid-priceasc', function (req, res, next) {
             });
             res.render('shop/huawei_mobilegrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -18138,6 +18809,8 @@ router.get('/nokia-mobile-list-priceasc', function (req, res, next) {
             });
             res.render('shop/nokia', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -18186,6 +18859,8 @@ router.get('/nokia-mobile-grid-priceasc', function (req, res, next) {
             });
             res.render('shop/nokia_mobilegrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -18234,6 +18909,8 @@ router.get('/samsung-mobile-list-priceasc', function (req, res, next) {
             });
             res.render('shop/samsung_mobile', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -18282,6 +18959,8 @@ router.get('/samsung-mobile-grid-priceasc', function (req, res, next) {
             });
             res.render('shop/samsung_mobilegrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -18347,6 +19026,8 @@ router.get('/pricefilter-mobile-gridview-priceasc', function (req, res, next) {
             });
             res.render('shop/gridview_mobile', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -18413,6 +19094,8 @@ router.get('/pricefilter-mobile-listview-priceasc', function (req, res, next) {
             });
             res.render('shop/listview_mobile', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -18479,6 +19162,8 @@ router.get('/pricefilter-apple-mobilelist-priceasc', function (req, res, next) {
             });
             res.render('shop/apple_mobile', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -18546,6 +19231,8 @@ router.get('/pricefilter-apple-mobilegrid-priceasc', function (req, res, next) {
             });
             res.render('shop/apple_mobilegrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -18613,6 +19300,8 @@ router.get('/pricefilter-huawei-mobilelist-priceasc', function (req, res, next) 
             });
             res.render('shop/huawei_mobile', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -18681,6 +19370,8 @@ router.get('/pricefilter-huawei-mobilegrid-priceasc', function (req, res, next) 
             });
             res.render('shop/huawei_mobilegrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -18749,6 +19440,8 @@ router.get('/pricefilter-nokia-mobilelist-priceasc', function (req, res, next) {
             });
             res.render('shop/nokia', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -18817,6 +19510,8 @@ router.get('/pricefilter-nokia-mobilegrid-priceasc', function (req, res, next) {
             });
             res.render('shop/nokia_mobilegrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -18885,6 +19580,8 @@ router.get('/pricefilter-samsung-mobilelist-priceasc', function (req, res, next)
             });
             res.render('shop/samsung_mobile', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -18953,6 +19650,8 @@ router.get('/pricefilter-samsung-mobilegrid-priceAsc', function (req, res, next)
             });
             res.render('shop/samsung_mobilegrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -19005,6 +19704,8 @@ router.get('/mobile-grid-view-pricedesc', function (req, res, next) {
             });
             res.render('shop/gridview_mobile', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -19052,6 +19753,8 @@ router.get('/mobile-list-view-pricedesc', function (req, res, next) {
             });
             res.render('shop/listview_mobile', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -19099,6 +19802,8 @@ router.get('/apple-mobile-list-pricedesc', function (req, res, next) {
             });
             res.render('shop/apple_mobile', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -19147,6 +19852,8 @@ router.get('/apple-mobile-grid-pricedesc', function (req, res, next) {
             });
             res.render('shop/apple_mobilegrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -19196,6 +19903,8 @@ router.get('/huawei-list-pricedesc', function (req, res, next) {
             });
             res.render('shop/huawei_mobile', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -19244,6 +19953,8 @@ router.get('/huawei-mobile-grid-pricedesc', function (req, res, next) {
             });
             res.render('shop/huawei_mobilegrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -19292,6 +20003,8 @@ router.get('/nokia-mobile-list-pricedesc', function (req, res, next) {
             });
             res.render('shop/nokia', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -19340,6 +20053,8 @@ router.get('/nokia-mobile-grid-pricedesc', function (req, res, next) {
             });
             res.render('shop/nokia_mobilegrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -19388,6 +20103,8 @@ router.get('/samsung-mobile-list-pricedesc', function (req, res, next) {
             });
             res.render('shop/samsung_mobile', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -19436,6 +20153,8 @@ router.get('/samsung-mobile-grid-pricedesc', function (req, res, next) {
             });
             res.render('shop/samsung_mobilegrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -19500,6 +20219,8 @@ router.get('/pricefilter-mobile-gridview-pricedesc', function (req, res, next) {
             });
             res.render('shop/gridview_mobile', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -19566,6 +20287,8 @@ router.get('/pricefilter-mobile-listview-pricedesc', function (req, res, next) {
             });
             res.render('shop/listview_mobile', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -19633,6 +20356,8 @@ router.get('/pricefilter-apple-mobilelist-pricedesc', function (req, res, next) 
             });
             res.render('shop/apple_mobile', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -19701,6 +20426,8 @@ router.get('/pricefilter-apple-mobilegrid-pricedesc', function (req, res, next) 
             });
             res.render('shop/apple_mobilegrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -19769,6 +20496,8 @@ router.get('/pricefilter-huawei-mobilelist-pricedesc', function (req, res, next)
             });
             res.render('shop/huawei_mobile', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -19837,6 +20566,8 @@ router.get('/pricefilter-huawei-mobilegrid-pricedesc', function (req, res, next)
             });
             res.render('shop/huawei_mobilegrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -19905,6 +20636,8 @@ router.get('/pricefilter-nokia-mobilelist-pricedesc', function (req, res, next) 
             });
             res.render('shop/nokia', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -19973,6 +20706,8 @@ router.get('/pricefilter-nokia-mobilegrid-pricedesc', function (req, res, next) 
             });
             res.render('shop/nokia_mobilegrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -20041,6 +20776,8 @@ router.get('/pricefilter-samsung-mobilelist-pricedesc', function (req, res, next
             });
             res.render('shop/samsung_mobile', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -20109,6 +20846,8 @@ router.get('/pricefilter-samsung-mobilegrid-pricedesc', function (req, res, next
             });
             res.render('shop/samsung_mobilegrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -20161,6 +20900,8 @@ router.get('/mobile-grid-view-nameasc', function (req, res, next) {
             });
             res.render('shop/gridview_mobile', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -20207,6 +20948,8 @@ router.get('/mobile-list-view-nameasc', function (req, res, next) {
             });
             res.render('shop/listview_mobile', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -20254,6 +20997,8 @@ router.get('/apple-mobile-list-nameasc', function (req, res, next) {
             });
             res.render('shop/apple_mobile', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -20302,6 +21047,8 @@ router.get('/apple-mobile-grid-nameasc', function (req, res, next) {
             });
             res.render('shop/apple_mobilegrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -20350,6 +21097,8 @@ router.get('/huawei-list-nameasc', function (req, res, next) {
             });
             res.render('shop/huawei_mobile', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -20398,6 +21147,8 @@ router.get('/huawei-mobile-grid-nameasc', function (req, res, next) {
             });
             res.render('shop/huawei_mobilegrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -20446,6 +21197,8 @@ router.get('/nokia-mobile-list-nameasc', function (req, res, next) {
             });
             res.render('shop/nokia', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -20494,6 +21247,8 @@ router.get('/nokia-mobile-grid-nameasc', function (req, res, next) {
             });
             res.render('shop/nokia_mobilegrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -20542,6 +21297,8 @@ router.get('/samsung-mobile-list-nameasc', function (req, res, next) {
             });
             res.render('shop/samsung_mobile', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -20590,6 +21347,8 @@ router.get('/samsung-mobile-grid-nameasc', function (req, res, next) {
             });
             res.render('shop/samsung_mobilegrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -20654,6 +21413,8 @@ router.get('/pricefilter-mobile-grid-view-nameasc', function (req, res, next) {
             });
             res.render('shop/gridview_mobile', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -20720,6 +21481,8 @@ router.get('/pricefilter-mobile-list-view-nameasc', function (req, res, next) {
             });
             res.render('shop/listview_mobile', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -20787,6 +21550,8 @@ router.get('/pricefilter-apple-mobilelist-nameasc', function (req, res, next) {
             });
             res.render('shop/apple_mobile', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -20855,6 +21620,8 @@ router.get('/pricefilter-apple-mobilegrid-nameasc', function (req, res, next) {
             });
             res.render('shop/apple_mobilegrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -20923,6 +21690,8 @@ router.get('/pricefilter-huawei-mobilelist-nameasc', function (req, res, next) {
             });
             res.render('shop/huawei_mobile', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -20991,6 +21760,8 @@ router.get('/pricefilter-huawei-mobilegrid-nameasc', function (req, res, next) {
             });
             res.render('shop/huawei_mobilegrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -21059,6 +21830,8 @@ router.get('/pricefilter-nokia-mobilelist-nameasc', function (req, res, next) {
             });
             res.render('shop/nokia', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -21127,6 +21900,8 @@ router.get('/pricefilter-nokia-mobilegrid-nameasc', function (req, res, next) {
             });
             res.render('shop/nokia_mobilegrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -21195,6 +21970,8 @@ router.get('/pricefilter-samsung-mobilelist-nameasc', function (req, res, next) 
             });
             res.render('shop/samsung_mobile', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -21263,6 +22040,8 @@ router.get('/pricefilter-samsung-mobilegrid-nameasc', function (req, res, next) 
             });
             res.render('shop/samsung_mobilegrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -21315,6 +22094,8 @@ router.get('/mobile-grid-view-namedesc', function (req, res, next) {
             });
             res.render('shop/gridview_mobile', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -21361,6 +22142,8 @@ router.get('/mobile-list-view-namedesc', function (req, res, next) {
             });
             res.render('shop/listview_mobile', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -21408,6 +22191,8 @@ router.get('/apple-mobile-list-namedesc', function (req, res, next) {
             });
             res.render('shop/apple_mobile', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -21455,6 +22240,8 @@ router.get('/apple-mobile-grid-namedesc', function (req, res, next) {
             });
             res.render('shop/apple_mobilegrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -21503,6 +22290,8 @@ router.get('/huawei-list-namedesc', function (req, res, next) {
             });
             res.render('shop/huawei_mobile', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -21551,6 +22340,8 @@ router.get('/huawei-mobile-grid-namedesc', function (req, res, next) {
             });
             res.render('shop/huawei_mobilegrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -21599,6 +22390,8 @@ router.get('/nokia-mobile-list-namedesc', function (req, res, next) {
             });
             res.render('shop/nokia', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -21647,6 +22440,8 @@ router.get('/nokia-mobile-grid-namedesc', function (req, res, next) {
             });
             res.render('shop/nokia_mobilegrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -21695,6 +22490,8 @@ router.get('/samsung-mobile-list-namedesc', function (req, res, next) {
             });
             res.render('shop/samsung_mobile', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -21743,6 +22540,8 @@ router.get('/samsung-mobile-grid-namedesc', function (req, res, next) {
             });
             res.render('shop/samsung_mobilegrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -21807,6 +22606,8 @@ router.get('/pricefilter-mobile-gridview-namedesc', function (req, res, next) {
             });
             res.render('shop/gridview_mobile', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -21872,6 +22673,8 @@ router.get('/pricefilter-mobile-listview-namedesc', function (req, res, next) {
             });
             res.render('shop/listview_mobile', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -21938,6 +22741,8 @@ router.get('/pricefilter-apple-mobilelist-namedesc', function (req, res, next) {
             });
             res.render('shop/apple_mobile', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -22006,6 +22811,8 @@ router.get('/pricefilter-apple-mobilegrid-namedesc', function (req, res, next) {
             });
             res.render('shop/apple_mobilegrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -22074,6 +22881,8 @@ router.get('/pricefilter-huawei-mobilelist-namedesc', function (req, res, next) 
             });
             res.render('shop/huawei_mobile', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -22142,6 +22951,8 @@ router.get('/pricefilter-huawei-mobilegrid-namedesc', function (req, res, next) 
             });
             res.render('shop/huawei_mobilegrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -22210,6 +23021,8 @@ router.get('/pricefilter-nokia-mobilelist-namedesc', function (req, res, next) {
             });
             res.render('shop/nokia', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -22278,6 +23091,8 @@ router.get('/pricefilter-nokia-mobilegrid-namedesc', function (req, res, next) {
             });
             res.render('shop/nokia_mobilegrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -22346,6 +23161,8 @@ router.get('/pricefilter-samsung-mobilelist-namedesc', function (req, res, next)
             });
             res.render('shop/samsung_mobile', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,
@@ -22414,6 +23231,8 @@ router.get('/pricefilter-samsung-mobilegrid-pricedesc', function (req, res, next
             });
             res.render('shop/samsung_mobilegrid', {
                 user: req.user,
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 layout: 'layout_2',
                 firstchunk: firstchunk,
                 product: productschun,

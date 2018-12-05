@@ -3,11 +3,31 @@ const router = express.Router();
 const csrf = require('csurf');
 const passport = require('passport');
 const Order = require('../models/order');
+const Product = require('../models/product');
 const Cart = require('../models/cart');
 
 var csrfProtect = csrf();
 router.use(csrfProtect);
+var featuredmobile = [];
+var featuredlaptop = [];
 
+Product.find({
+    category: 'mobile'
+  }).then((response) => {
+    featuredmobile.push(response.slice(0, 5));
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+Product.find({
+    category: 'laptop'
+  }).then((response) => {
+    featuredlaptop.push(response.slice(0, 5));
+
+  })
+  .catch((error) => {
+    console.log(error);
+  });
 /* GET users listing. */
 
 router.get('/profile', isLoggedIn, (req, res, next) => {
@@ -23,6 +43,8 @@ router.get('/profile', isLoggedIn, (req, res, next) => {
       order.items = cart.generateArray();
     })
     res.render('user/profile', {
+      featuredmobile: featuredmobile,
+      featuredlaptop: featuredlaptop,
       user: req.user,
       layout: 'layout_2',
       order: orders

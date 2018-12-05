@@ -3,7 +3,27 @@ const express = require('express'),
     Product = require('../models/product'),
     Order = require('../models/order'),
     Wishlist = require('../models/wishlist'),
+    featuredmobile = [],
+    featuredlaptop = [],
     Cart = require('../models/cart');
+
+Product.find({
+        category: 'mobile'
+    }).then((response) => {
+        featuredmobile.push(response.slice(0, 5));
+    })
+    .catch((error) => {
+        console.log(error);
+    });
+Product.find({
+        category: 'laptop'
+    }).then((response) => {
+        featuredlaptop.push(response.slice(0,5));
+        
+    })
+    .catch((error) => {
+        console.log(error);
+    });
 
 /* GET home page. */
 router.get('/checkout', isLoggedIn, function (req, res, next) {
@@ -13,6 +33,8 @@ router.get('/checkout', isLoggedIn, function (req, res, next) {
 
     var cart = new Cart(req.session.cart);
     res.render('pages/checkout', {
+        featuredmobile: featuredmobile,
+        featuredlaptop: featuredlaptop,
         user: req.user,
         product: cart.generateArray(),
         totalPrice: cart.totalPrice
@@ -50,7 +72,7 @@ router.post('/checkout', isLoggedIn, function (req, res, next) {
     });
 });
 
-router.get('/addtoWishlist/:id', isLoggedIn, function (req, res, next) {
+router.get('/addtoWishlist/:id', isLoggedIn2, function (req, res, next) {
 
     Product.find({
         _id: req.params.id
@@ -160,10 +182,10 @@ router.get('/', function (req, res, next) {
     Product.find({
             category: 'laptop'
         }).then((response) => {
-            featuredl1.push(response.slice(1, 2));
-            featuredl2.push(response.slice(2, 3));
-            laptop1.push(response.slice(3, 7));
-            laptop2.push(response.slice(7, 11));
+            featuredl1.push(response.slice(0, 1));
+            featuredl2.push(response.slice(1, 2));
+            laptop1.push(response.slice(2, 6));
+            laptop2.push(response.slice(6, 10));
         })
         .catch((error) => {
             console.log(error);
@@ -171,12 +193,13 @@ router.get('/', function (req, res, next) {
     Product.find({
             category: 'accessories'
         }).then((response) => {
-            featureda1.push(response.slice(1, 2));
-            featureda2.push(response.slice(2, 3));
-            accessories1.push(response.slice(3, 7));
-            accessories2.push(response.slice(7, 11));
+            featureda1.push(response.slice(0, 1));
+            featureda2.push(response.slice(1, 2));
+            accessories1.push(response.slice(2, 6));
+            accessories2.push(response.slice(6, 10));
             res.render('pages/home', {
-
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 user: req.user,
                 product: productschun,
                 trending: trending,
@@ -257,7 +280,8 @@ router.get('/home', function (req, res, next) {
             accessories1.push(response.slice(3, 7));
             accessories2.push(response.slice(7, 11));
             res.render('pages/home', {
-
+                featuredmobile: featuredmobile,
+                featuredlaptop: featuredlaptop,
                 user: req.user,
                 product: productschun,
                 trending: trending,
@@ -284,24 +308,26 @@ router.get('/home', function (req, res, next) {
 
 router.get('/about', function (req, res, next) {
     res.render('pages/about', {
-                user: req.user
+        featuredmobile: featuredmobile,
+        featuredlaptop: featuredlaptop,
+        user: req.user
     });
 });
 
-    router.get('/add-to-cart/:id', function (req, res, next) {
-        var productId = req.params.id;
-        var cart = new Cart(req.session.cart ? req.session.cart : {
-            items: {}
-        });
-        Product.findById(productId, (err, product) => {
-            if (err) {
-                console.log(err);
-            }
-            cart.add(product, product.id);
-            res.redirect(req.headers.referer);
-            req.session.cart = cart;
-        })
+router.get('/add-to-cart/:id', function (req, res, next) {
+    var productId = req.params.id;
+    var cart = new Cart(req.session.cart ? req.session.cart : {
+        items: {}
     });
+    Product.findById(productId, (err, product) => {
+        if (err) {
+            console.log(err);
+        }
+        cart.add(product, product.id);
+        res.redirect(req.headers.referer);
+        req.session.cart = cart;
+    })
+});
 
 router.get('/add1-to-cart/:id', function (req, res, next) {
     router.use((req, res, next) => {
@@ -347,12 +373,16 @@ router.get('/remove-to-cart/:id', (req, res, next) => {
 router.get('/shopping-cart', (req, res, next) => {
     if (!req.session.cart) {
         return res.render('pages/cart', {
+            featuredmobile: featuredmobile,
+            featuredlaptop: featuredlaptop,
             user: req.user,
             product: null
         });
     }
     var cart = new Cart(req.session.cart);
     res.render('pages/cart', {
+        featuredmobile: featuredmobile,
+        featuredlaptop: featuredlaptop,
         user: req.user,
         product: cart.generateArray(),
         totalPrice: cart.totalPrice
@@ -374,7 +404,8 @@ router.get('/detail-view/:id', function (req, res, next) {
             return res.redirect('/');
         }
         res.render('pages/detailview', {
-
+            featuredmobile: featuredmobile,
+            featuredlaptop: featuredlaptop,
             user: req.user,
             layout: 'layout_2',
             product: product
@@ -390,4 +421,10 @@ function isLoggedIn(req, res, next) {
         return next();
     }
     res.redirect('/user/signin');
+}
+function isLoggedIn2(req, res, next) {
+    if (req.isAuthenticated()) {
+        return next();
+    }
+    res.send('/user/signin');
 }
