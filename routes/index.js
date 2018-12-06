@@ -3,6 +3,7 @@ const express = require('express'),
     Product = require('../models/product'),
     Order = require('../models/order'),
     Wishlist = require('../models/wishlist'),
+    Trending = require('../models/trending'),
     featuredmobile = [],
     featuredlaptop = [],
     Cart = require('../models/cart');
@@ -73,9 +74,10 @@ router.post('/checkout', isLoggedIn, function (req, res, next) {
 });
 
 router.get('/addtoWishlist/:id', isLoggedIn2, function (req, res, next) {
-
+    var productId = req.params.id;
+    addtotrending(productId);
     Product.find({
-        _id: req.params.id
+        _id: productId
     }).then((docs) => {
         console.log(req.user)
         Wishlist.findOne({
@@ -143,9 +145,10 @@ router.get('/addtoWishlist/:id', isLoggedIn2, function (req, res, next) {
 });
 
 router.get('/shop/addtoWishlist/:id', isLoggedIn2, function (req, res, next) {
-
+    var productId = req.params.id;
+    addtotrending(productId);
     Product.find({
-        _id: req.params.id
+        _id: productId
     }).then((docs) => {
         console.log(req.user)
         Wishlist.findOne({
@@ -230,6 +233,24 @@ router.get('/', function (req, res, next) {
         dealoftheday = [],
         featured = [];
 
+     Trending.find().sort({trendval: -1}).limit(10).then((response) => {
+             for(var i = 0; i < response.length; i++){
+                 Product.find({
+                        _id: response[i].prodId
+                     }).then((resp) => {
+                         trending.push(resp);
+                     })
+                     .catch((error) => {
+                         console.log(error);
+                     });
+             };
+             console.log(trending);
+         })
+         .catch((error) => {
+             console.log(error);
+         });
+
+
     Product.find({
             dealoftheday: true
         }).then((response) => {
@@ -238,6 +259,7 @@ router.get('/', function (req, res, next) {
         .catch((error) => {
             console.log(error);
         });
+   
     Product.find({
             category: 'mobile'
         }).then((response) => {
@@ -311,6 +333,24 @@ router.get('/home', function (req, res, next) {
         featureda2 = [],
         dealoftheday = [],
         featured = [];
+
+    Trending.find().sort({
+            trendval: -1
+        }).limit(10).then((response) => {
+            for (var i = 0; i < response.length; i++) {
+                Product.find({
+                        _id: response[i].prodId
+                    }).then((resp) => {
+                        trending.push(resp);
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+            };
+        })
+        .catch((error) => {
+            console.log(error);
+        });
 
     Product.find({
             dealoftheday: true
@@ -386,16 +426,18 @@ router.get('/about', function (req, res, next) {
 
 router.get('/add-to-cart/:id', function (req, res, next) {
     var productId = req.params.id;
+    addtotrending(productId);
     var cart = new Cart(req.session.cart ? req.session.cart : {
         items: {}
     });
     Product.findById(productId, (err, product) => {
         if (err) {
             console.log(err);
+            return res.redirect(req.headers.referer);
         }
         cart.add(product, product.id);
-        res.redirect(req.headers.referer);
         req.session.cart = cart;
+        res.redirect(req.headers.referer);
     })
 });
 
@@ -408,7 +450,8 @@ router.get('/add1-to-cart/:id', function (req, res, next) {
 
     var productId = req.params.id;
 
-    console.log(req.body.quantity);
+    addtotrending(productId);
+    
     var cart = new Cart(req.session.cart ? req.session.cart : {
         items: {}
     });
@@ -468,7 +511,7 @@ router.get('/contact', function (req, res, next) {
 router.get('/detail-view/:id', function (req, res, next) {
 
     var productId = req.params.id;
-
+    addtotrending(productId);
     Product.findById(productId, (err, product) => {
         if (err) {
             return res.redirect('/');
@@ -581,3 +624,36 @@ function isLoggedIn2(req, res, next) {
 function escapeRegex(text) {
     return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
 };
+
+function addtotrending(id) {
+    Trending.findOne({
+        'prodId': id
+    }, (err, obj) => {
+        if (err) {
+            return ('error: ' + err);
+        } else if (obj) {
+
+            Trending.updateOne({
+                'prodId': id
+            }, {
+                $inc: {
+                    trendval: 1
+                }
+            }, (err, raw) => {
+                if (err) {
+                    console.log(err);
+                }
+                console.log(raw);
+            });
+        } else {
+            var newTrending = new Trending();
+            newTrending.prodId = id;
+            newTrending.trendval = 1;
+            newTrending.save((err, res) => {
+                if (err) {
+                    console.log(err);
+                }
+            });
+        }
+    });
+}

@@ -28,7 +28,7 @@ module.exports = function Cart(oldCart) {
             delete this.items[id];
         }
     }
-    this.update = function (item,id, qnty) {
+    this.update = function (item, id, qnty) {
         var storedItem = this.items[id];
         if (!storedItem) {
             storedItem = this.items[id] = {
@@ -37,14 +37,14 @@ module.exports = function Cart(oldCart) {
                 price: 0
             };
         }
-        storedItem.qty+(qnty);
+        storedItem.qty + (qnty);
         storedItem.price = storedItem.item.price * storedItem.qty;
         this.totalQty++;
         this.totalPrice += storedItem.item.price;
 
     }
     this.remove = function (id) {
-        this.totalQty-= this.items[id].qty;
+        this.totalQty -= this.items[id].qty;
         this.totalPrice -= this.items[id].price;
         delete this.items[id];
     }
