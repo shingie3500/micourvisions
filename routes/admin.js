@@ -54,9 +54,10 @@ var fupload = upload.fields([{
 }]);
 
 router.post('/data', fupload, function (req, res, next) {
-    console.log(req.files);
+    var name = req.body.name;
+    var title = name.toLowerCase();
     var fields = {
-        title: req.body.name,
+        title: title,
         shortDescription: req.body.shortDescription,
         fullDescription: req.body.fullDescription,
         image: req.files.imageFV[0].path,

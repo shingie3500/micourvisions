@@ -34,39 +34,19 @@
                                     <div class="product-rate">
                                         <div class="product-rating" style="width:100%"></div>
                                     </div>
-                                    <p class="desc product-desc">Beautifully versatile 2-in-1 design with InfinityEdge
-                                        display and great performance all in a remarkably mobile.</p>
-                                    <div class="detail-attr-color border radius6">
-                                        <strong class="text-uppercase">Color</strong><span class="gray">Violet</span>
-                                        <ul class="list-inline-block filter-attr list-attr-color">
-                                            <li><a href="#" style="background:#ffffff" class="border"></a></li>
-                                            <li><a href="#" style="background:#e66054"></a></li>
-                                            <li><a href="#" class="active" style="background:#d0b7cc"></a></li>
-                                            <li><a href="#" style="background:#107a8e"></a></li>
-                                            <li><a href="#" style="background:#b9cad2"></a></li>
-                                            <li><a href="#" style="background:#a7bc93"></a></li>
-                                            <li><a href="#" style="background:#d3b627"></a></li>
-                                            <li><a href="#" style="background:#b4b3ae"></a></li>
-                                            <li><a href="#" style="background:#502006"></a></li>
-                                            <li><a href="#" style="background:#311e21"></a></li>
-                                        </ul>
-                                    </div>
+                                    <p class="desc product-desc">{{product.shortDescription}}</p>
                                     <ul class="list-inline-block detail-qty-cart">
                                         <li>
-                                            <div class="detail-qty info-qty border">
-                                                <label class="navi">Qty</label>
-                                                <span class="qty-val">1</span>
-                                                <a href="#" class="qty-down smoke"><i class="icon ion-ios-minus-empty"></i></a>
-                                                <a href="#" class="qty-up smoke"><i class="icon ion-ios-plus-empty"></i></a>
-                                            </div>
+                                            <a data-url="/addtoWishlist/{{product._id}}" onclick="addtoWishlist(this)"
+                                                class="wishlist-link color title30"><i class="icon ion-android-favorite-outline"></i></a>
+
                                         </li>
                                         <li>
-                                            <a class="addcart-link shop-button bg-color" href="#"><i class="icon ion-android-cart"></i>Add
-                                                to Cart</a>
+                                            <a href="/add-to-cart/{{product._id}}" class="addcart-link shop-button color">Add
+                                                to cart</a>
                                         </li>
                                         <li>
-                                            <a href="#" class="wishlist-link color"><i class="title30 icon ion-android-favorite-outline"></i><span>Add
-                                                    to Wishlist</span></a>
+                                            <a href="#" class="compare-link color title30"><i class="icon ion-ios-checkmark-outline"></i></a>
                                         </li>
                                     </ul>
                                 </div>
@@ -84,24 +64,15 @@
                             <div id="tab1" class="tab-pane active">
                                 <div class="tab-desc">
                                     <h3 class="title18">Details</h3>
-                                    <p class="desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et
-                                        turpis in tortor ullamcorper condimentum. Quisque in turpis felis. Praesent
-                                        adipiscing bibendum porttitor. Vestibulum imperdiet, leo non pretium iaculis,
-                                        elit nisi sagittis libero, ornare laoreet velit purus at dui. Fusce aliquet
-                                        egestas risus non semper. Donec sit amet nibh enim, ut congue felis. Duis
-                                        dictum convallis purus. Suspendisse potenti. Sed et nisl nulla. Vivamus rutrum
-                                        adipiscing varius. Suspendisse interdum, nulla ac scelerisque cursus, dolor
-                                        mauris venenatis metus, et vestibulum nibh est condimentum turpis. Fusce quis
-                                        ultrices elit. Fusce est sapien, varius ut fermentum vel, blandit non purus</p>
-                                    <div class="tab-desc-thumb text-center"><img src="../images/shop/desc.jpg" alt="" /></div>
-                                    <p class="desc">Quisque in turpis felis. Praesent adipiscing bibendum porttitor.
-                                        Vestibulum imperdiet, leo non pretium iaculis, elit nisi sagittis libero,
-                                        ornare laoreet velit purus at dui. Fusce aliquet egestas risus non semper.
-                                        Donec sit amet nibh enim, ut congue felis. Duis dictum convallis purus.
-                                        Suspendisse potenti. Sed et nisl nulla. Vivamus rutrum adipiscing varius.
-                                        Suspendisse interdum, nulla ac scelerisque cursus, dolor mauris venenatis
-                                        metus, et vestibulum nibh est condimentum turpis. Fusce quis ultrices elit.
-                                        Fusce est sapien, varius ut fermentum vel, blandit non purus</p>
+                                    <div class="tab-desc-thumb text-center">
+                                        <div class="row">
+                                            <div class="col-md-4"><img src="{{product.imageSV}}" alt="" /></div>
+                                            <div class="col-md-4"><img src="{{product.image}}" alt="" /></div>
+                                            <div class="col-md-4"><img src="{{product.imageBV}}" alt="" /></div>
+                                        </div>
+                                    </div>
+
+                                    <p class="desc">{{product.fullDescription}}</p>
                                 </div>
                             </div>
                             <div id="tab2" class="tab-pane">
@@ -257,162 +228,6 @@
                         </div>
                     </div>
                     <!-- End Detail Tab -->
-                    <div class="product-related">
-                        <h2 class="title24 font-bold"><span>Related Products</span></h2>
-                        <div class="product-trend-slider">
-                            <div class="wrap-item group-navi" data-pagination="false" data-navigation="true"
-                                data-itemscustom="[[0,1],[560,2],[767,3],[768,2],[990,3]]">
-                                <div class="item-product text-center style1">
-                                    <div class="product-thumb">
-                                        <a href="#" class="product-thumb-link zoom-thumb"><img src="../images/product/fb-tech-laptop-02.png"
-                                                alt="" /></a>
-                                        <a href="quick-view.html" class="quickview-link fancybox fancybox.iframe">Quick
-                                            view</a>
-                                    </div>
-                                    <div class="product-info">
-                                        <a href="#" class="cat-parent color">Mobile</a>
-                                        <h3 class="title16 font-bold product-title"><a href="#">IPhone7 plus ID747</a></h3>
-                                        <div class="product-price">
-                                            <del class="silver"><span>$490.00 </span></del>
-                                            <ins class="font-bold"><span>$245.00</span></ins>
-                                        </div>
-                                        <div class="product-extra-link style1">
-                                            <a href="#" class="wishlist-link color title30"><i class="icon ion-android-favorite-outline"></i></a>
-                                            <a href="#" class="addcart-link shop-button color">Add to cart</a>
-                                            <a href="#" class="compare-link color title30"><i class="icon ion-ios-checkmark-outline"></i></a>
-                                        </div>
-                                        <div class="product-rate">
-                                            <div class="product-rating" style="width:100%"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item-product text-center style1">
-                                    <div class="product-thumb">
-                                        <a href="#" class="product-thumb-link zoom-thumb"><img src="../images/product/fb-tech-laptop-07.png"
-                                                alt="" /></a>
-                                        <a href="quick-view.html" class="quickview-link fancybox fancybox.iframe">Quick
-                                            view</a>
-                                    </div>
-                                    <div class="product-info">
-                                        <a href="#" class="cat-parent color">Mobile</a>
-                                        <h3 class="title16 font-bold product-title"><a href="#">Lenovo smartphone vibe
-                                                k6 note hero</a></h3>
-                                        <div class="product-price">
-                                            <del class="silver"><span>$490.00 </span></del>
-                                            <ins class="font-bold"><span>$245.00</span></ins>
-                                        </div>
-                                        <div class="product-extra-link style1">
-                                            <a href="#" class="wishlist-link color title30"><i class="icon ion-android-favorite-outline"></i></a>
-                                            <a href="#" class="addcart-link shop-button color">Add to cart</a>
-                                            <a href="#" class="compare-link color title30"><i class="icon ion-ios-checkmark-outline"></i></a>
-                                        </div>
-                                        <div class="product-rate">
-                                            <div class="product-rating" style="width:100%"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item-product text-center style1">
-                                    <div class="product-thumb">
-                                        <a href="#" class="product-thumb-link zoom-thumb"><img src="../images/product/fb-tech-smartphone-03.png"
-                                                alt="" /></a>
-                                        <a href="quick-view.html" class="quickview-link fancybox fancybox.iframe">Quick
-                                            view</a>
-                                    </div>
-                                    <div class="product-info">
-                                        <a href="#" class="cat-parent color">Watches</a>
-                                        <h3 class="title16 font-bold product-title"><a href="#">Ella angle2 1024x1024</a></h3>
-                                        <div class="product-price">
-                                            <del class="silver"><span>$490.00 </span></del>
-                                            <ins class="font-bold"><span>$245.00</span></ins>
-                                        </div>
-                                        <div class="product-extra-link style1">
-                                            <a href="#" class="wishlist-link color title30"><i class="icon ion-android-favorite-outline"></i></a>
-                                            <a href="#" class="addcart-link shop-button color">Add to cart</a>
-                                            <a href="#" class="compare-link color title30"><i class="icon ion-ios-checkmark-outline"></i></a>
-                                        </div>
-                                        <div class="product-rate">
-                                            <div class="product-rating" style="width:100%"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item-product text-center style1">
-                                    <div class="product-thumb">
-                                        <a href="#" class="product-thumb-link zoom-thumb"><img src="../images/product/fb-tech-watch-03.png"
-                                                alt="" /></a>
-                                        <a href="quick-view.html" class="quickview-link fancybox fancybox.iframe">Quick
-                                            view</a>
-                                    </div>
-                                    <div class="product-info">
-                                        <a href="#" class="cat-parent color">Mobile</a>
-                                        <h3 class="title16 font-bold product-title"><a href="#">Lenovo smartphone vibe
-                                                k6 note hero</a></h3>
-                                        <div class="product-price">
-                                            <del class="silver"><span>$490.00 </span></del>
-                                            <ins class="font-bold"><span>$245.00</span></ins>
-                                        </div>
-                                        <div class="product-extra-link style1">
-                                            <a href="#" class="wishlist-link color title30"><i class="icon ion-android-favorite-outline"></i></a>
-                                            <a href="#" class="addcart-link shop-button color">Add to cart</a>
-                                            <a href="#" class="compare-link color title30"><i class="icon ion-ios-checkmark-outline"></i></a>
-                                        </div>
-                                        <div class="product-rate">
-                                            <div class="product-rating" style="width:100%"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item-product text-center style1">
-                                    <div class="product-thumb">
-                                        <a href="#" class="product-thumb-link zoom-thumb"><img src="../images/product/fb-tech-laptop-05.png"
-                                                alt="" /></a>
-                                        <a href="quick-view.html" class="quickview-link fancybox fancybox.iframe">Quick
-                                            view</a>
-                                    </div>
-                                    <div class="product-info">
-                                        <a href="#" class="cat-parent color">Watches</a>
-                                        <h3 class="title16 font-bold product-title"><a href="#">Ella angle2 1024x1024</a></h3>
-                                        <div class="product-price">
-                                            <del class="silver"><span>$490.00 </span></del>
-                                            <ins class="font-bold"><span>$245.00</span></ins>
-                                        </div>
-                                        <div class="product-extra-link style1">
-                                            <a href="#" class="wishlist-link color title30"><i class="icon ion-android-favorite-outline"></i></a>
-                                            <a href="#" class="addcart-link shop-button color">Add to cart</a>
-                                            <a href="#" class="compare-link color title30"><i class="icon ion-ios-checkmark-outline"></i></a>
-                                        </div>
-                                        <div class="product-rate">
-                                            <div class="product-rating" style="width:100%"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item-product text-center style1">
-                                    <div class="product-thumb">
-                                        <a href="#" class="product-thumb-link zoom-thumb"><img src="../images/product/fb-tech-watch-06.png"
-                                                alt="" /></a>
-                                        <a href="quick-view.html" class="quickview-link fancybox fancybox.iframe">Quick
-                                            view</a>
-                                    </div>
-                                    <div class="product-info">
-                                        <a href="#" class="cat-parent color">Mobile</a>
-                                        <h3 class="title16 font-bold product-title"><a href="#">Lenovo smartphone vibe
-                                                k6 note hero</a></h3>
-                                        <div class="product-price">
-                                            <del class="silver"><span>$490.00 </span></del>
-                                            <ins class="font-bold"><span>$245.00</span></ins>
-                                        </div>
-                                        <div class="product-extra-link style1">
-                                            <a href="#" class="wishlist-link color title30"><i class="icon ion-android-favorite-outline"></i></a>
-                                            <a href="#" class="addcart-link shop-button color">Add to cart</a>
-                                            <a href="#" class="compare-link color title30"><i class="icon ion-ios-checkmark-outline"></i></a>
-                                        </div>
-                                        <div class="product-rate">
-                                            <div class="product-rating" style="width:100%"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Product Related -->
                 </div>
             </div>
         </div>
