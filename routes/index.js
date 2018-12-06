@@ -18,8 +18,8 @@ Product.find({
 Product.find({
         category: 'laptop'
     }).then((response) => {
-        featuredlaptop.push(response.slice(0,5));
-        
+        featuredlaptop.push(response.slice(0, 5));
+
     })
     .catch((error) => {
         console.log(error);
@@ -141,6 +141,7 @@ router.get('/addtoWishlist/:id', isLoggedIn2, function (req, res, next) {
     });
 
 });
+
 router.get('/shop/addtoWishlist/:id', isLoggedIn2, function (req, res, next) {
 
     Product.find({
@@ -483,6 +484,84 @@ router.get('/detail-view/:id', function (req, res, next) {
 
 });
 
+router.get('/search', (req, res, next) => {
+    var noMatch = '';
+    if (req.query.search) {
+        const regex = new RegExp(escapeRegex(req.query.search), 'gi');
+        var productschun = [],
+            firstchunk = [],
+            chunksize = 9,
+            docs = [],
+            pages = [],
+            nextp = [];
+        Product.find({
+            brand: regex
+        }).then(resp => {
+            if (resp.length > 0) {
+                docs = docs.concat(resp);
+            }
+        }).catch(err => {
+            console.log(err);
+        });
+        Product.find({
+            category: regex
+        }).then(resp => {
+            if (resp.length > 0) {
+                docs = docs.concat(resp);
+            }
+        }).catch(err => {
+            console.log(err);
+        });
+        Product.find({
+            "title": regex
+        }, function (err, resp) {
+            if (resp.length > 0) {
+                docs = docs.concat(resp);
+            }
+            if (err) {
+                console.log(err);
+            } else {
+                if (docs.length < 1) {
+                    noMatch = "No products match that query, please try again.";
+                }
+                for (var i = 9; i < docs.length; i += chunksize) {
+                    productschun.push(docs.slice(i, i + chunksize));
+                }
+                nextp.push({
+                    nxt: "content-page" + (productschun.length + 1)
+                });
+                firstchunk.push(docs.slice(0, chunksize));
+                for (var i = 1; i <= productschun.length; i++) {
+
+                    var page = {
+                        pagenum: i + 1,
+                        pageId: "page" + (i + 1),
+                    }
+                    pages.push(page);
+                }
+                productschun.forEach(function (obj, i) {
+                    obj.pagecontent = "content-page" + (i + 2);
+                });
+                res.render("pages/results", {
+                    noMatch: noMatch,
+                    hasnoMatch: noMatch.length < 1,
+                    user: req.user,
+                    featuredmobile: featuredmobile,
+                    featuredlaptop: featuredlaptop,
+                    layout: 'layout_2',
+                    firstchunk: firstchunk,
+                    product: productschun,
+                    page: pages,
+                    prev: "content-page1",
+                    nextp: nextp
+                });
+            }
+        });
+    } else {
+        res.redirect(req.headers.referer);
+    }
+})
+
 module.exports = router;
 
 function isLoggedIn(req, res, next) {
@@ -491,9 +570,14 @@ function isLoggedIn(req, res, next) {
     }
     res.redirect('/user/signin');
 }
+
 function isLoggedIn2(req, res, next) {
     if (req.isAuthenticated()) {
         return next();
     }
     res.send('/user/signin');
 }
+
+function escapeRegex(text) {
+    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+};

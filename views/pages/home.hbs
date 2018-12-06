@@ -48,29 +48,31 @@
             <div class="product-trend-slider">
                 <div class="wrap-item group-navi" data-pagination="false" data-navigation="true" data-itemscustom="[[0,1],[560,2],[768,3],[990,4]]">
                     {{#each trending}}
-                        {{#each this}}
-                        <div class="item-product text-center style1">
-                            <div class="product-thumb">
-                                <a href="#" class="product-thumb-link zoom-thumb"><img src={{this.image}} alt="" /></a>
-                                <a href="/detail-view/{{this._id}}" class="quickview-link fancybox fancybox.iframe">Detail view</a>
+                    {{#each this}}
+                    <div class="item-product text-center style1">
+                        <div class="product-thumb">
+                            <a href="#" class="product-thumb-link zoom-thumb"><img src={{this.image}} alt="" /></a>
+                            <a href="/detail-view/{{this._id}}" class="quickview-link fancybox fancybox.iframe">Detail
+                                view</a>
+                        </div>
+                        <div class="product-info">
+                            <a href="#" class="cat-parent color">{{this.category}}</a>
+                            <h3 class="title16 font-bold product-title"><a href="#">{{this.title}}</a></h3>
+                            <div class="product-price">
+                                <ins class="font-bold"><span>${{this.price}}</span></ins>
                             </div>
-                            <div class="product-info">
-                                <a href="#" class="cat-parent color">{{this.category}}</a>
-                                <h3 class="title16 font-bold product-title"><a href="#">{{this.title}}</a></h3>
-                                <div class="product-price">
-                                    <ins class="font-bold"><span>${{this.price}}</span></ins>
-                                </div>
-                                <div class="product-extra-link style1">
-                                    <a data-url="/addtoWishlist/{{this._id}}" onclick="addtoWishlist(this)" class="wishlist-link color title30"><i class="icon ion-android-favorite-outline"></i></a>
-                                    <a href="/add-to-cart/{{this._id}}" class="addcart-link shop-button color">Add to cart</a>
-                                    <a href="#" class="compare-link color title30"><i class="icon ion-ios-checkmark-outline"></i></a>
-                                </div>
-                                <div class="product-rate">
-                                    <div class="product-rating" style="width:100%"></div>
-                                </div>
+                            <div class="product-extra-link style1">
+                                <a data-url="/addtoWishlist/{{this._id}}" onclick="addtoWishlist(this)" class="wishlist-link color title30"><i
+                                        class="icon ion-android-favorite-outline"></i></a>
+                                <a href="/add-to-cart/{{this._id}}" class="addcart-link shop-button color">Add to cart</a>
+                                <a href="#" class="compare-link color title30"><i class="icon ion-ios-checkmark-outline"></i></a>
+                            </div>
+                            <div class="product-rate">
+                                <div class="product-rating" style="width:100%"></div>
                             </div>
                         </div>
-                        {{/each}}
+                    </div>
+                    {{/each}}
                     {{/each}}
                 </div>
             </div>
@@ -79,7 +81,7 @@
     </div>
     {{#each dealoftheday}}
     {{#each this}}
-    <div class="deal-of-day text-center bg-color2 white" >
+    <div class="deal-of-day text-center bg-color2 white">
         <div class="row">
             <div class="col col-md-4 col-md-offset-2">
                 <h2 class="title30 font-bold">Deal Of the Day</h2>
@@ -127,8 +129,10 @@
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <div class="item-product text-center style1">
                                     <div class="product-thumb">
-                                        <a href="#" class="product-thumb-link zoom-thumb"><img src={{this.image}} width="576px" height="537" alt=""></a>
-                                        <a href="/detail-view/{{this._id}}" class="quickview-link fancybox fancybox.iframe">Detail view</a>
+                                        <a href="#" class="product-thumb-link zoom-thumb"><img src={{this.image}} width="576px"
+                                                height="537" alt=""></a>
+                                        <a href="/detail-view/{{this._id}}" class="quickview-link fancybox fancybox.iframe">Detail
+                                            view</a>
                                     </div>
                                     <div class="product-info">
                                         <a href="#" class="cat-parent color">Mobile</a>
@@ -137,8 +141,10 @@
                                             <ins class="font-bold"><span>${{this.price}}</span></ins>
                                         </div>
                                         <div class="product-extra-link style1">
-                                            <a style="" data-url="/addtoWishlist/{{this._id}}" onclick="addtoWishlist(this)" class="wishlist-link color title30"><i class="icon ion-android-favorite-outline"></i></a>
-                                            <a href="/add-to-cart/{{this._id}}" class="addcart-link shop-button color">Add to cart</a>
+                                            <a style="" data-url="/addtoWishlist/{{this._id}}" onclick="addtoWishlist(this)"
+                                                class="wishlist-link color title30"><i class="icon ion-android-favorite-outline"></i></a>
+                                            <a href="/add-to-cart/{{this._id}}" class="addcart-link shop-button color">Add
+                                                to cart</a>
                                             <a href="#" class="compare-link color title30"><i class="icon ion-ios-checkmark-outline"></i></a>
                                         </div>
                                         <div class="product-rate">
@@ -155,7 +161,8 @@
                                 <div class="item-product text-center style1">
                                     <div class="product-thumb">
                                         <a href="#" class="product-thumb-link zoom-thumb"><img src="{{this.image}}" alt=""></a>
-                                        <a href="/detail-view/{{this._id}}" class="quickview-link fancybox fancybox.iframe">Detail view</a>
+                                        <a href="/detail-view/{{this._id}}" class="quickview-link fancybox fancybox.iframe">Detail
+                                            view</a>
                                         <div class="product-label">
                                         </div>
                                     </div>
@@ -166,8 +173,10 @@
                                             <ins class="font-bold"><span>${{this.price}}</span></ins>
                                         </div>
                                         <div class="product-extra-link style1">
-                                            <a data-url="/addtoWishlist/{{this._id}}" onclick="addtoWishlist(this)" class="wishlist-link color title30"><i class="icon ion-android-favorite-outline"></i></a>
-                                            <a href="/add-to-cart/{{this._id}}" class="addcart-link shop-button color">Add to cart</a>
+                                            <a data-url="/addtoWishlist/{{this._id}}" onclick="addtoWishlist(this)"
+                                                class="wishlist-link color title30"><i class="icon ion-android-favorite-outline"></i></a>
+                                            <a href="/add-to-cart/{{this._id}}" class="addcart-link shop-button color">Add
+                                                to cart</a>
                                             <a href="#" class="compare-link color title30"><i class="icon ion-ios-checkmark-outline"></i></a>
                                         </div>
                                         <div class="product-rate">
@@ -188,8 +197,10 @@
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <div class="item-product text-center style1">
                                     <div class="product-thumb">
-                                        <a href="#" class="product-thumb-link zoom-thumb"><img src={{this.image}} width="576px" height="537" alt=""></a>
-                                        <a href="/detail-view/{{this._id}}" class="quickview-link fancybox fancybox.iframe">Detail view</a>
+                                        <a href="#" class="product-thumb-link zoom-thumb"><img src={{this.image}} width="576px"
+                                                height="537" alt=""></a>
+                                        <a href="/detail-view/{{this._id}}" class="quickview-link fancybox fancybox.iframe">Detail
+                                            view</a>
                                     </div>
                                     <div class="product-info">
                                         <a href="#" class="cat-parent color">Mobile</a>
@@ -198,8 +209,10 @@
                                             <ins class="font-bold"><span>${{this.price}}</span></ins>
                                         </div>
                                         <div class="product-extra-link style1">
-                                            <a data-url="/addtoWishlist/{{this._id}}" onclick="addtoWishlist(this)" class="wishlist-link color title30"><i class="icon ion-android-favorite-outline"></i></a>
-                                            <a href="/add-to-cart/{{this._id}}" class="addcart-link shop-button color">Add to cart</a>
+                                            <a data-url="/addtoWishlist/{{this._id}}" onclick="addtoWishlist(this)"
+                                                class="wishlist-link color title30"><i class="icon ion-android-favorite-outline"></i></a>
+                                            <a href="/add-to-cart/{{this._id}}" class="addcart-link shop-button color">Add
+                                                to cart</a>
                                             <a href="#" class="compare-link color title30"><i class="icon ion-ios-checkmark-outline"></i></a>
                                         </div>
                                         <div class="product-rate">
@@ -216,7 +229,8 @@
                                 <div class="item-product text-center style1">
                                     <div class="product-thumb">
                                         <a href="#" class="product-thumb-link zoom-thumb"><img src="{{this.image}}" alt=""></a>
-                                        <a href="/detail-view/{{this._id}}" class="quickview-link fancybox fancybox.iframe">Detail view</a>
+                                        <a href="/detail-view/{{this._id}}" class="quickview-link fancybox fancybox.iframe">Detail
+                                            view</a>
                                         <div class="product-label">
                                         </div>
                                     </div>
@@ -227,8 +241,10 @@
                                             <ins class="font-bold"><span>${{this.price}}</span></ins>
                                         </div>
                                         <div class="product-extra-link style1">
-                                            <a data-url="/addtoWishlist/{{this._id}}" onclick="addtoWishlist(this)" class="wishlist-link color title30"><i class="icon ion-android-favorite-outline"></i></a>
-                                            <a href="/add-to-cart/{{this._id}}" class="addcart-link shop-button color">Add to cart</a>
+                                            <a data-url="/addtoWishlist/{{this._id}}" onclick="addtoWishlist(this)"
+                                                class="wishlist-link color title30"><i class="icon ion-android-favorite-outline"></i></a>
+                                            <a href="/add-to-cart/{{this._id}}" class="addcart-link shop-button color">Add
+                                                to cart</a>
                                             <a href="#" class="compare-link color title30"><i class="icon ion-ios-checkmark-outline"></i></a>
                                         </div>
                                         <div class="product-rate">
@@ -273,12 +289,12 @@
                 </div>
                 <br>
                 <a href="#" class="shop-button white">Daily Deals</a>
-            </div>   
+            </div>
             <div class="col col-md-4">
                 <div class="deal-of-thumb wow flipInX">
                     <img src="{{this.image}}" height="300" alt="" />
                 </div>
-            </div>   
+            </div>
         </div>
     </div>
     {{/each}}
@@ -296,8 +312,10 @@
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <div class="item-product text-center style1">
                                     <div class="product-thumb">
-                                        <a href="#" class="product-thumb-link zoom-thumb"><img src={{this.image}} width="576px" height="537" alt=""></a>
-                                        <a href="/detail-view/{{this._id}}" class="quickview-link fancybox fancybox.iframe">Detail view</a>
+                                        <a href="#" class="product-thumb-link zoom-thumb"><img src={{this.image}} width="576px"
+                                                height="537" alt=""></a>
+                                        <a href="/detail-view/{{this._id}}" class="quickview-link fancybox fancybox.iframe">Detail
+                                            view</a>
                                     </div>
                                     <div class="product-info">
                                         <a href="#" class="cat-parent color">Laptop</a>
@@ -306,8 +324,10 @@
                                             <ins class="font-bold"><span>${{this.price}}</span></ins>
                                         </div>
                                         <div class="product-extra-link style1">
-                                            <a data-url="/addtoWishlist/{{this._id}}" onclick="addtoWishlist(this)" class="wishlist-link color title30"><i class="icon ion-android-favorite-outline"></i></a>
-                                            <a href="/add-to-cart/{{this._id}}" class="addcart-link shop-button color">Add to cart</a>
+                                            <a data-url="/addtoWishlist/{{this._id}}" onclick="addtoWishlist(this)"
+                                                class="wishlist-link color title30"><i class="icon ion-android-favorite-outline"></i></a>
+                                            <a href="/add-to-cart/{{this._id}}" class="addcart-link shop-button color">Add
+                                                to cart</a>
                                             <a href="#" class="compare-link color title30"><i class="icon ion-ios-checkmark-outline"></i></a>
                                         </div>
                                         <div class="product-rate">
@@ -324,7 +344,8 @@
                                 <div class="item-product text-center style1">
                                     <div class="product-thumb">
                                         <a href="#" class="product-thumb-link zoom-thumb"><img src="{{this.image}}" alt=""></a>
-                                        <a href="/detail-view/{{this._id}}" class="quickview-link fancybox fancybox.iframe">Detail view</a>
+                                        <a href="/detail-view/{{this._id}}" class="quickview-link fancybox fancybox.iframe">Detail
+                                            view</a>
                                         <div class="product-label">
                                         </div>
                                     </div>
@@ -335,8 +356,10 @@
                                             <ins class="font-bold"><span>${{this.price}}</span></ins>
                                         </div>
                                         <div class="product-extra-link style1">
-                                            <a data-url="/addtoWishlist/{{this._id}}" onclick="addtoWishlist(this)" class="wishlist-link color title30"><i class="icon ion-android-favorite-outline"></i></a>
-                                            <a href="/add-to-cart/{{this._id}}" class="addcart-link shop-button color">Add to cart</a>
+                                            <a data-url="/addtoWishlist/{{this._id}}" onclick="addtoWishlist(this)"
+                                                class="wishlist-link color title30"><i class="icon ion-android-favorite-outline"></i></a>
+                                            <a href="/add-to-cart/{{this._id}}" class="addcart-link shop-button color">Add
+                                                to cart</a>
                                             <a href="#" class="compare-link color title30"><i class="icon ion-ios-checkmark-outline"></i></a>
                                         </div>
                                         <div class="product-rate">
@@ -357,8 +380,10 @@
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <div class="item-product text-center style1">
                                     <div class="product-thumb">
-                                        <a href="#" class="product-thumb-link zoom-thumb"><img src={{this.image}} width="576px" height="537" alt=""></a>
-                                        <a href="/detail-view/{{this._id}}" class="quickview-link fancybox fancybox.iframe">Detail view</a>
+                                        <a href="#" class="product-thumb-link zoom-thumb"><img src={{this.image}} width="576px"
+                                                height="537" alt=""></a>
+                                        <a href="/detail-view/{{this._id}}" class="quickview-link fancybox fancybox.iframe">Detail
+                                            view</a>
                                     </div>
                                     <div class="product-info">
                                         <a href="#" class="cat-parent color">Laptop</a>
@@ -367,8 +392,10 @@
                                             <ins class="font-bold"><span>${{this.price}}</span></ins>
                                         </div>
                                         <div class="product-extra-link style1">
-                                            <a data-url="/addtoWishlist/{{this._id}}" onclick="addtoWishlist(this)" class="wishlist-link color title30"><i class="icon ion-android-favorite-outline"></i></a>
-                                            <a href="/add-to-cart/{{this._id}}" class="addcart-link shop-button color">Add to cart</a>
+                                            <a data-url="/addtoWishlist/{{this._id}}" onclick="addtoWishlist(this)"
+                                                class="wishlist-link color title30"><i class="icon ion-android-favorite-outline"></i></a>
+                                            <a href="/add-to-cart/{{this._id}}" class="addcart-link shop-button color">Add
+                                                to cart</a>
                                             <a href="#" class="compare-link color title30"><i class="icon ion-ios-checkmark-outline"></i></a>
                                         </div>
                                         <div class="product-rate">
@@ -385,7 +412,8 @@
                                 <div class="item-product text-center style1">
                                     <div class="product-thumb">
                                         <a href="#" class="product-thumb-link zoom-thumb"><img src="{{this.image}}" alt=""></a>
-                                        <a href="/detail-view/{{this._id}}" class="quickview-link fancybox fancybox.iframe">Detail view</a>
+                                        <a href="/detail-view/{{this._id}}" class="quickview-link fancybox fancybox.iframe">Detail
+                                            view</a>
                                         <div class="product-label">
                                         </div>
                                     </div>
@@ -396,8 +424,10 @@
                                             <ins class="font-bold"><span>${{this.price}}</span></ins>
                                         </div>
                                         <div class="product-extra-link style1">
-                                            <a data-url="/addtoWishlist/{{this._id}}" onclick="addtoWishlist(this)" class="wishlist-link color title30"><i class="icon ion-android-favorite-outline"></i></a>
-                                            <a href="/add-to-cart/{{this._id}}" class="addcart-link shop-button color">Add to cart</a>
+                                            <a data-url="/addtoWishlist/{{this._id}}" onclick="addtoWishlist(this)"
+                                                class="wishlist-link color title30"><i class="icon ion-android-favorite-outline"></i></a>
+                                            <a href="/add-to-cart/{{this._id}}" class="addcart-link shop-button color">Add
+                                                to cart</a>
                                             <a href="#" class="compare-link color title30"><i class="icon ion-ios-checkmark-outline"></i></a>
                                         </div>
                                         <div class="product-rate">
@@ -426,8 +456,10 @@
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <div class="item-product text-center style1">
                                     <div class="product-thumb">
-                                        <a href="#" class="product-thumb-link zoom-thumb"><img src={{this.image}} width="576px" height="537" alt=""></a>
-                                        <a href="/detail-view/{{this._id}}/{{this._id}}" class="quickview-link fancybox fancybox.iframe">Detail view</a>
+                                        <a href="#" class="product-thumb-link zoom-thumb"><img src={{this.image}} width="576px"
+                                                height="537" alt=""></a>
+                                        <a href="/detail-view/{{this._id}}/{{this._id}}" class="quickview-link fancybox fancybox.iframe">Detail
+                                            view</a>
                                     </div>
                                     <div class="product-info">
                                         <a href="#" class="cat-parent color">Watch</a>
@@ -436,8 +468,10 @@
                                             <ins class="font-bold"><span>${{this.price}}</span></ins>
                                         </div>
                                         <div class="product-extra-link style1">
-                                            <a data-url="/addtoWishlist/{{this._id}}" onclick="addtoWishlist(this)" class="wishlist-link color title30"><i class="icon ion-android-favorite-outline"></i></a>
-                                            <a href="/add-to-cart/{{this._id}}" class="addcart-link shop-button color">Add to cart</a>
+                                            <a data-url="/addtoWishlist/{{this._id}}" onclick="addtoWishlist(this)"
+                                                class="wishlist-link color title30"><i class="icon ion-android-favorite-outline"></i></a>
+                                            <a href="/add-to-cart/{{this._id}}" class="addcart-link shop-button color">Add
+                                                to cart</a>
                                             <a href="#" class="compare-link color title30"><i class="icon ion-ios-checkmark-outline"></i></a>
                                         </div>
                                         <div class="product-rate">
@@ -454,7 +488,8 @@
                                 <div class="item-product text-center style1">
                                     <div class="product-thumb">
                                         <a href="#" class="product-thumb-link zoom-thumb"><img src="{{this.image}}" alt=""></a>
-                                        <a href="/detail-view/{{this._id}}" class="quickview-link fancybox fancybox.iframe">Detail view</a>
+                                        <a href="/detail-view/{{this._id}}" class="quickview-link fancybox fancybox.iframe">Detail
+                                            view</a>
                                         <div class="product-label">
                                         </div>
                                     </div>
@@ -465,8 +500,10 @@
                                             <ins class="font-bold"><span>${{this.price}}</span></ins>
                                         </div>
                                         <div class="product-extra-link style1">
-                                            <a data-url="/addtoWishlist/{{this._id}}" onclick="addtoWishlist(this)" class="wishlist-link color title30"><i class="icon ion-android-favorite-outline"></i></a>
-                                            <a href="/add-to-cart/{{this._id}}" class="addcart-link shop-button color">Add to cart</a>
+                                            <a data-url="/addtoWishlist/{{this._id}}" onclick="addtoWishlist(this)"
+                                                class="wishlist-link color title30"><i class="icon ion-android-favorite-outline"></i></a>
+                                            <a href="/add-to-cart/{{this._id}}" class="addcart-link shop-button color">Add
+                                                to cart</a>
                                             <a href="#" class="compare-link color title30"><i class="icon ion-ios-checkmark-outline"></i></a>
                                         </div>
                                         <div class="product-rate">
@@ -487,8 +524,10 @@
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <div class="item-product text-center style1">
                                     <div class="product-thumb">
-                                        <a href="#" class="product-thumb-link zoom-thumb"><img src={{this.image}} width="576px" height="537" alt=""></a>
-                                        <a href="/detail-view/{{this._id}}/{{this._id}}" class="quickview-link fancybox fancybox.iframe">Detail view</a>
+                                        <a href="#" class="product-thumb-link zoom-thumb"><img src={{this.image}} width="576px"
+                                                height="537" alt=""></a>
+                                        <a href="/detail-view/{{this._id}}/{{this._id}}" class="quickview-link fancybox fancybox.iframe">Detail
+                                            view</a>
                                     </div>
                                     <div class="product-info">
                                         <a href="#" class="cat-parent color">Watch</a>
@@ -497,8 +536,10 @@
                                             <ins class="font-bold"><span>${{this.price}}</span></ins>
                                         </div>
                                         <div class="product-extra-link style1">
-                                            <a data-url="/addtoWishlist/{{this._id}}" onclick="addtoWishlist(this)" class="wishlist-link color title30"><i class="icon ion-android-favorite-outline"></i></a>
-                                            <a href="/add-to-cart/{{this._id}}" class="addcart-link shop-button color">Add to cart</a>
+                                            <a data-url="/addtoWishlist/{{this._id}}" onclick="addtoWishlist(this)"
+                                                class="wishlist-link color title30"><i class="icon ion-android-favorite-outline"></i></a>
+                                            <a href="/add-to-cart/{{this._id}}" class="addcart-link shop-button color">Add
+                                                to cart</a>
                                             <a href="#" class="compare-link color title30"><i class="icon ion-ios-checkmark-outline"></i></a>
                                         </div>
                                         <div class="product-rate">
@@ -515,7 +556,8 @@
                                 <div class="item-product text-center style1">
                                     <div class="product-thumb">
                                         <a href="#" class="product-thumb-link zoom-thumb"><img src="{{this.image}}" alt=""></a>
-                                        <a href="/detail-view/{{this._id}}" class="quickview-link fancybox fancybox.iframe">Detail view</a>
+                                        <a href="/detail-view/{{this._id}}" class="quickview-link fancybox fancybox.iframe">Detail
+                                            view</a>
                                         <div class="product-label">
                                         </div>
                                     </div>
@@ -526,8 +568,11 @@
                                             <ins class="font-bold"><span>${{this.price}}</span></ins>
                                         </div>
                                         <div class="product-extra-link style1">
-                                            <div data-url="/addtoWishlist/{{this._id}}" onclick="addtoWishlist(this)" onclick="addtoWishlist(this)" class="wishlist-link color title30"><i class="icon ion-android-favorite-outline"></i></div>
-                                            <a href="/add-to-cart/{{this._id}}" class="addcart-link shop-button color">Add to cart</a>
+                                            <div data-url="/addtoWishlist/{{this._id}}" onclick="addtoWishlist(this)"
+                                                onclick="addtoWishlist(this)" class="wishlist-link color title30"><i
+                                                    class="icon ion-android-favorite-outline"></i></div>
+                                            <a href="/add-to-cart/{{this._id}}" class="addcart-link shop-button color">Add
+                                                to cart</a>
                                             <a href="#" class="compare-link color title30"><i class="icon ion-ios-checkmark-outline"></i></a>
                                         </div>
                                         <div class="product-rate">
@@ -545,7 +590,7 @@
             </div>
         </div>
     </div>
-    
+
     <!-- End Client Box -->
     <div class="container">
         <div class="brand-box">
@@ -584,11 +629,8 @@
     </div>
 
 </section>
-
 {{>footer}}
 <script>
-    
-
         function expiration() {
             var clock = document.getElementById('clockdiv');
             var a = clock.getAttribute("data-expdate");
