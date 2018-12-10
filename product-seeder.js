@@ -1,7 +1,7 @@
 var Product = require('./models/product');
 var mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost:27017/micourvision', () => {
+mongoose.connect('mongodb://localhost:27017/micourvisions', () => {
     console.log("db connected");
 });
 
