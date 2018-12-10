@@ -36,9 +36,10 @@
                                     </td>
                                     <td class="product-quantity" data-title="Quantity">
                                         <div class="detail-qty info-qty border">
-                                            <span class="text-primary">{{this.qty}}</span>
-                                            <a href="/sub-to-cart/{{this.item._id}}" class=""><i class="icon ion-ios-minus-empty"></i></a>
-                                            <a href="/add1-to-cart/{{this.item._id}}" class=""><i class="icon ion-ios-plus-empty"></i></a>
+                                            <label class="navi">Qty</label>
+                                            <span class="qty-val">{{this.qty}}</span>
+                                            <a id="qty-sub"  data-href="/sub-to-cart/{{this.item._id}}" class="qty-down smoke"><i class="icon ion-ios-minus-empty"></i></a>
+                                            <a id="qty-add"  data-href="/add1-to-cart/{{this.item._id}}" class="qty-up smoke"><i class="icon ion-ios-plus-empty"></i></a>
                                         </div>
                                     </td>
                                     <td class="product-subtotal" data-title="Total">

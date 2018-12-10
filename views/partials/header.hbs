@@ -37,7 +37,7 @@
                                 In</a>
                         </li>
                         {{/if}}
-                        <li>
+                        <li id="cart-list">
                             <div class="mini-cart-box mini-cart1 dropdown-box">
                                 <a class="mini-cart-link" href="/shopping-cart">
                                     <span class="mini-cart-icon title18 white"><i class="icon ion-android-cart"></i></span>
@@ -51,7 +51,7 @@
                                         {{#each session.cart.items}}
                                         <div class="product-mini-cart table">
                                             <div class="product-thumb">
-                                                <a href="/detail-view" class="product-thumb-link"><img alt="" src="{{this.item.imagePath}}"></a>
+                                                <a href="/detail-view" class="product-thumb-link"><img alt="" src="{{this.item.image}}"></a>
                                             </div>
                                             <div class="product-info">
                                                 <h3 class="product-title title16 font-bold"><a href="#">{{this.item.title}}</a></h3>

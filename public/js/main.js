@@ -1,5 +1,9 @@
 $(document).ready(() => {
-
+    $('a#sattech').on('click', (event) => {
+        event.preventDefault();
+        //window.open('www.sattech.co.zw', '_blank');
+        URL.replace('www.sattech.co.zw', '_blank')
+    });
     $('.form').find('input, textarea').on('keyup blur focus', function (e) {
 
         var $this = $(this),
@@ -25,6 +29,7 @@ $(document).ready(() => {
                 label.addClass('highlight');
             }
         }
+
 
     });
 
@@ -93,22 +98,85 @@ $(document).ready(() => {
         }
         e.preventDefault();
     });
-    
+
+    $(document).on("click", ".createUserform", function () {
+        $(this).find('#userform').validate({
+            rules: {
+                password: {
+                    minlength: 4
+                },
+                password2: {
+                    equalTo: '[name="password"]',
+                }
+            },
+            messages: {
+                password2: {
+                    equalTo: "Make sure the two passwords are matching"
+                }
+            },
+            highlight: function (element) {
+                $(element).parent().addClass('error')
+            },
+            unhighlight: function (element) {
+                $(element).parent().removeClass('error')
+            },
+            onsubmit: true
+        });
+    })
+
+    $('a.qty-up').on('click', (event)=>{
+        event.preventDefault();
+        var add = document.getElementById('qty-add');
+        var Url = add.getAttribute('data-href');
+       
+        $.ajax({
+            url: Url,
+            type: 'GET',
+            success: function (result) {
+                console.log(result);
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    })
+
+    $('a.qty-down').on('click', (event)=>{
+        event.preventDefault();
+        var add = document.getElementById('qty-sub');
+        var Url = add.getAttribute('data-href');
+       
+        $.ajax({
+            url: Url,
+            type: 'GET',
+            success: function (result) {
+                if(result.toString()== '/shopping-cart'){
+                    window.location.href = '/shopping-cart';
+                }else{
+                    
+                };
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    })
+
     function sort() {
         var id = $('select.select').attr('id');
         if (id == 'priceDesc') {
-            $('#pricedesc').attr('selected',true);
+            $('#pricedesc').attr('selected', true);
         }
         if (id == 'priceAsc') {
-            $('#priceasc').attr('selected',true);
+            $('#priceasc').attr('selected', true);
         }
         if (id == 'nameDesc') {
-            $('#namedesc').attr('selected',true);
+            $('#namedesc').attr('selected', true);
         }
         if (id == 'nameAsc') {
-            $('#nameasc').attr('selected',true);
+            $('#nameasc').attr('selected', true);
         }
-        
+
     }
     sort();
 });

@@ -14,6 +14,7 @@ var schema = new Schema({
     brand: {type: String, required:true},
     quantity:{type: Number},
     dealoftheday: {type: Boolean},
+    dateAdded: {type: Date},
     expdate: {type : Date}
 });
 

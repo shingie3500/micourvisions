@@ -1,13 +1,5 @@
 <div class="signup__container">
     <div class="container__child signup__thumbnail">
-        {{#if hasErrors}}
-        <div class="alert alert-danger">
-            {{#each message}}
-            <p>{{this}}</p>
-            <br>
-            {{/each}}
-        </div>
-        {{/if}}
         <div class="thumbnail__content text-center">
             <h1 class="heading--primary">Welcome to MiCourVision.</h1>
         </div>
@@ -27,7 +19,10 @@
     </div>
     <div class="form container__child signup__form">
         <div id="login" class="active">
+            <div style="height: 50px"></div>
+
             <h1>Sign In</h1>
+            <div style="height: 20px"></div>
 
             <form action="/user/signin" method="post">
 
@@ -35,15 +30,24 @@
                     <label>
                         Email Address<span class="req">*</span>
                     </label>
-                    <input type="email" name="email" required autocomplete="off" />
-                </div>
+                    <input type="email" class="field-wrap2" name="email" required autocomplete="off" />
 
+                </div>
+                {{#if hasErrors}}
+                {{#each message}}
+                <p id="msg" class="alert alert-danger" data-toggle="tooltip" data-placement="right" title="Tooltip on right">
+                    {{this}}
+                </p>
+
+                {{/each}}
+                {{/if}}
                 <div class="field-wrap">
                     <label>
                         Password<span class="req">*</span>
                     </label>
-                    <input type="password" name="password" required autocomplete="off" />
+                    <input type="password" class="field-wrap2" name="password" required autocomplete="off" />
                 </div>
+                <div style="height: 30px"></div>
 
                 <p class="forgot"> <a href="#">Forgot Password?</a> | <a href="/user/signup">Don't have an account?</a></p>
                 <input type="hidden" name="_csrf" value="{{csrfToken}}">

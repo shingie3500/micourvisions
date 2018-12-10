@@ -56,6 +56,7 @@ app.use(passport.session());
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use('/bower-components', express.static(path.join(__dirname, 'bower-components')));
 
 app.use((req, res, next) => {
   res.locals.login = req.isAuthenticated();

@@ -233,22 +233,24 @@ router.get('/', function (req, res, next) {
         dealoftheday = [],
         featured = [];
 
-     Trending.find().sort({trendval: -1}).limit(10).then((response) => {
-             for(var i = 0; i < response.length; i++){
-                 Product.find({
+    Trending.find().sort({
+            trendval: -1
+        }).limit(10).then((response) => {
+            for (var i = 0; i < response.length; i++) {
+                Product.find({
                         _id: response[i].prodId
-                     }).then((resp) => {
-                         trending.push(resp);
-                     })
-                     .catch((error) => {
-                         console.log(error);
-                     });
-             };
-             console.log(trending);
-         })
-         .catch((error) => {
-             console.log(error);
-         });
+                    }).then((resp) => {
+                        trending.push(resp);
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+            };
+            console.log(trending);
+        })
+        .catch((error) => {
+            console.log(error);
+        });
 
 
     Product.find({
@@ -259,7 +261,7 @@ router.get('/', function (req, res, next) {
         .catch((error) => {
             console.log(error);
         });
-   
+
     Product.find({
             category: 'mobile'
         }).then((response) => {
@@ -451,7 +453,7 @@ router.get('/add1-to-cart/:id', function (req, res, next) {
     var productId = req.params.id;
 
     addtotrending(productId);
-    
+
     var cart = new Cart(req.session.cart ? req.session.cart : {
         items: {}
     });
@@ -460,8 +462,9 @@ router.get('/add1-to-cart/:id', function (req, res, next) {
             return res.redirect(req.headers.referer);
         }
         cart.add(product, product.id);
+
         req.session.cart = cart;
-        res.redirect(req.headers.referer);
+        res.send(cart);
     })
 });
 
@@ -471,7 +474,12 @@ router.get('/sub-to-cart/:id', (req, res, next) => {
 
     cart.sub(id);
     req.session.cart = cart;
-    res.redirect(req.headers.referer);
+    
+    if (cart.totalQty < 1) {
+        res.send('/shopping-cart');
+    } else {
+        res.send(cart);
+    }
 });
 
 router.get('/remove-to-cart/:id', (req, res, next) => {

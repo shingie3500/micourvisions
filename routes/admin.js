@@ -40,9 +40,6 @@ router.get('/admin', (req, res, next) => {
     });
 })
 var fupload = upload.fields([{
-    name: 'image',
-    maxCount: 1
-}, {
     name: 'imageSV',
     maxCount: 1
 }, {
