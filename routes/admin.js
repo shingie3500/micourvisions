@@ -39,7 +39,7 @@ router.get('/admin', (req, res, next) => {
         layout: 'layout_2'
     });
 })
-var fupload = upload.fields([{
+const fupload = upload.fields([{
     name: 'imageSV',
     maxCount: 1
 }, {
@@ -51,23 +51,40 @@ var fupload = upload.fields([{
 }]);
 
 router.post('/data', fupload, function(req, res, next) {
-    var name = req.body.name;
-    var title = name.toLowerCase();
+    const name = req.body.name;
+    const title = name.toLowerCase();
+    const svpath = sv_path();
+    const bvpath = bv_path();
 
-    var fields = {
+    function sv_path() {
+        if (req.files.imageSV) {
+            return req.files.imageSV[0].path;
+        } else {
+            return "n/a";
+        }
+    }
+
+    function bv_path() {
+        if (req.files.imageBV) {
+            return req.files.imageBV[0].path;
+        } else {
+            return "n/a";
+        }
+    }
+    const fields = {
         title: title,
         shortDescription: req.body.shortDescription,
         fullDescription: req.body.fullDescription,
         image: req.files.imageFV[0].path,
-        imageSV: req.files.imageSV[0].path,
-        imageBV: req.files.imageBV[0].path,
+        imageSV: svpath,
+        imageBV: bvpath,
         price: req.body.price,
         quantity: req.body.quantity,
         category: req.body.category,
         brand: req.body.brand,
         dealoftheday: false
     }
-    var product = new Product(fields);
+    const product = new Product(fields);
     product.save(function(err, produc) {
         if (err) throw err;
         console.error('saved img to mongo');

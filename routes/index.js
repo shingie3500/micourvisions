@@ -20,9 +20,12 @@ Product.find({
     .catch((error) => {
         console.log(error);
     });
+
 Product.find({
         category: 'laptop'
     }).then((response) => {
+        console.log(response);
+        console.log("response");
         featuredlaptop.push(response.slice(0, 5));
 
     })
