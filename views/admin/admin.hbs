@@ -2,8 +2,10 @@
 
 <!-- End Header -->
 <section id="content">
+
+    <p class="text-success">{{msg}}</p>
     <div class="container">
-        <form action="/admin/data" method="post">
+        <form action="/admin/data" method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="name">Name</label>
                 <input type="text" class="form-control" name="name" id="name" placeholder="Enter name">
@@ -17,16 +19,16 @@
                 <textarea class="form-control" id="fullDescription" name="fullDescription" rows="3"></textarea>
             </div>
             <div class="form-group">
-                <label for="imageFV">ImageFV (Face-view)</label>
-                <input type="file" class="form-control-file" name="imageFV" id="imageFV">
+                <label for="imageFV">(Face-view)</label>
+                <input type="file" class="form-control-file" name="imageFV">
             </div>
             <div class="form-group">
-                <label for="imageSV">ImageSV (Side-view)</label>
-                <input type="file" class="form-control-file" name="imageSV" id="imageSV">
+                <label for="imageSV">(Side-view)</label>
+                <input type="file" class="form-control-file" name="imageSV">
             </div>
             <div class="form-group">
-                <label for="imageBV">ImageBV (Front-view)</label>
-                <input type="file" class="form-control-file" name="imageBV" id="imageBV">
+                <label for="imageBV">(Back-view)</label>
+                <input type="file" class="form-control-file" name="imageBV">
             </div>
             <div class="form-group">
                 <label for="price">Price</label>

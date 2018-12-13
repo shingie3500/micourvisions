@@ -50,9 +50,10 @@ var fupload = upload.fields([{
     maxCount: 1
 }]);
 
-router.post('/data', fupload, function (req, res, next) {
+router.post('/data', fupload, function(req, res, next) {
     var name = req.body.name;
     var title = name.toLowerCase();
+    console.log(req);
     var fields = {
         title: title,
         shortDescription: req.body.shortDescription,
@@ -67,13 +68,14 @@ router.post('/data', fupload, function (req, res, next) {
         dealoftheday: false
     }
     var product = new Product(fields);
-    product.save(function (err, produc) {
+    product.save(function(err, produc) {
         if (err) throw err;
         console.error('saved img to mongo');
     });
 
-    res.send({
-        status: true
+    res.render('admin/admin', {
+        layout: 'layout_2',
+        msg: "Product has been saved"
     });
 });
 

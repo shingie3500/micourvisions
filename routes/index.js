@@ -1,3 +1,5 @@
+'use strict';
+
 const express = require('express'),
     router = express.Router(),
     Product = require('../models/product'),
@@ -6,11 +8,13 @@ const express = require('express'),
     Trending = require('../models/trending'),
     featuredmobile = [],
     featuredlaptop = [],
+    nodemailer = require('nodemailer'),
     Cart = require('../models/cart');
 
 Product.find({
         category: 'mobile'
     }).then((response) => {
+        //console.log(response);
         featuredmobile.push(response.slice(0, 5));
     })
     .catch((error) => {
@@ -27,7 +31,7 @@ Product.find({
     });
 
 /* GET home page. */
-router.get('/checkout', isLoggedIn, function (req, res, next) {
+router.get('/checkout', isLoggedIn, function(req, res, next) {
     if (!req.session.cart) {
         return res.redirect('/shopping-cart');
     }
@@ -42,7 +46,7 @@ router.get('/checkout', isLoggedIn, function (req, res, next) {
     });
 });
 
-router.post('/checkout', isLoggedIn, function (req, res, next) {
+router.post('/checkout', isLoggedIn, function(req, res, next) {
 
     if (!req.session.cart) {
         return res.redirect('/shopping-cart');
@@ -62,7 +66,7 @@ router.post('/checkout', isLoggedIn, function (req, res, next) {
 
     // implement pay now here
     var order = new Order(fields);
-    order.save(function (err, result) {
+    order.save(function(err, result) {
         if (err) {
             console.log(err);
             res.redirect('/checkout');
@@ -73,7 +77,7 @@ router.post('/checkout', isLoggedIn, function (req, res, next) {
     });
 });
 
-router.get('/addtoWishlist/:id', isLoggedIn2, function (req, res, next) {
+router.get('/addtoWishlist/:id', isLoggedIn2, function(req, res, next) {
     var productId = req.params.id;
     addtotrending(productId);
     Product.find({
@@ -144,7 +148,7 @@ router.get('/addtoWishlist/:id', isLoggedIn2, function (req, res, next) {
 
 });
 
-router.get('/shop/addtoWishlist/:id', isLoggedIn2, function (req, res, next) {
+router.get('/shop/addtoWishlist/:id', isLoggedIn2, function(req, res, next) {
     var productId = req.params.id;
     addtotrending(productId);
     Product.find({
@@ -215,7 +219,7 @@ router.get('/shop/addtoWishlist/:id', isLoggedIn2, function (req, res, next) {
 
 });
 
-router.get('/', function (req, res, next) {
+router.get('/', function(req, res, next) {
     var productschun = [],
         trending = [],
         smartphone1 = [],
@@ -318,7 +322,7 @@ router.get('/', function (req, res, next) {
         });
 });
 
-router.get('/home', function (req, res, next) {
+router.get('/home', function(req, res, next) {
     var productschun = [],
         trending = [],
         smartphone1 = [],
@@ -418,7 +422,7 @@ router.get('/home', function (req, res, next) {
         });
 });
 
-router.get('/about', function (req, res, next) {
+router.get('/about', function(req, res, next) {
     res.render('pages/about', {
         featuredmobile: featuredmobile,
         featuredlaptop: featuredlaptop,
@@ -426,7 +430,7 @@ router.get('/about', function (req, res, next) {
     });
 });
 
-router.get('/add-to-cart/:id', function (req, res, next) {
+router.get('/add-to-cart/:id', function(req, res, next) {
     var productId = req.params.id;
     addtotrending(productId);
     var cart = new Cart(req.session.cart ? req.session.cart : {
@@ -443,7 +447,7 @@ router.get('/add-to-cart/:id', function (req, res, next) {
     })
 });
 
-router.get('/add1-to-cart/:id', function (req, res, next) {
+router.get('/add1-to-cart/:id', function(req, res, next) {
     router.use((req, res, next) => {
         req.session.referrer = req.protocol + '://' + req.get('host') + req.originalUrl;
         next();
@@ -474,7 +478,7 @@ router.get('/sub-to-cart/:id', (req, res, next) => {
 
     cart.sub(id);
     req.session.cart = cart;
-    
+
     if (cart.totalQty < 1) {
         res.send('/shopping-cart');
     } else {
@@ -510,13 +514,63 @@ router.get('/shopping-cart', (req, res, next) => {
     })
 })
 
-router.get('/contact', function (req, res, next) {
+router.post('/sendmail', (req, res) => {
+    const output = `
+		<p>You have a new mail</p>
+		<h3>Contact Details</h3>
+		<ul>
+			<li> Username: ${req.body.username} </li>
+			<li> Email: ${req.body.email} </li>
+			<li> Comment: ${req.body.comment} </li>
+		</ul>
+		<h3>Contact Details</h3>
+		<p>${req.body.message}</p>
+`;
+
+    nodemailer.createTestAccount((err, account) => {
+        // create reusable transporter object using the default SMTP transport
+        let transporter = nodemailer.createTransport({
+            host: 'smtp.ethereal.email',
+            port: 587,
+            secure: false, // true for 465, false for other ports
+            auth: {
+                user: account.user, // generated ethereal user
+                pass: account.pass // generated ethereal password
+            }
+        });
+
+        // setup email data with unicode symbols
+        let mailOptions = {
+            from: '"Fred Foo ??" <foo@example.com>', // sender address
+            to: 'bar@example.com, baz@example.com', // list of receivers
+            subject: 'Hello ?', // Subject line
+            text: 'Hello world?', // plain text body
+            html: '<b>Hello world?</b>' // html body
+        };
+
+        // send mail with defined transport object
+        transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                return console.log(error);
+            }
+            console.log('Message sent: %s', info.messageId);
+            // Preview only available when sending through an Ethereal account
+            console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+
+            // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+            // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
+        });
+    });
+
+});
+
+router.get('/contact', function(req, res, next) {
     res.render('pages/contact', {
         user: req.user
     });
 });
 
-router.get('/detail-view/:id', function (req, res, next) {
+router.get('/detail-view/:id', function(req, res, next) {
 
     var productId = req.params.id;
     addtotrending(productId);
@@ -565,7 +619,7 @@ router.get('/search', (req, res, next) => {
         });
         Product.find({
             "title": regex
-        }, function (err, resp) {
+        }, function(err, resp) {
             if (resp.length > 0) {
                 docs = docs.concat(resp);
             }
@@ -590,7 +644,7 @@ router.get('/search', (req, res, next) => {
                     }
                     pages.push(page);
                 }
-                productschun.forEach(function (obj, i) {
+                productschun.forEach(function(obj, i) {
                     obj.pagecontent = "content-page" + (i + 2);
                 });
                 res.render("pages/results", {

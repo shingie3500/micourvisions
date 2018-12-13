@@ -51,13 +51,14 @@
                     {{#each this}}
                     <div class="item-product text-center style1">
                         <div class="product-thumb">
+    
                             <a href="#" class="product-thumb-link zoom-thumb"><img src={{this.image}} alt="" /></a>
                             <a href="/detail-view/{{this._id}}" class="quickview-link fancybox fancybox.iframe">Detail
                                 view</a>
                         </div>
                         <div class="product-info">
                             <a href="#" class="cat-parent color">{{this.category}}</a>
-                            <h3 class="title16 font-bold product-title"><a href="#">{{this.title}}</a></h3>
+                            <h3 class="title16 font-bold product-title text-capitalize"><a href="#">{{this.title}}</a></h3>
                             <div class="product-price">
                                 <ins class="font-bold"><span>${{this.price}}</span></ins>
                             </div>
@@ -129,14 +130,13 @@
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <div class="item-product text-center style1">
                                     <div class="product-thumb">
-                                        <a href="#" class="product-thumb-link zoom-thumb"><img src={{this.image}} width="576px"
-                                                height="537" alt=""></a>
+                                        <a href="#" class="product-thumb-link zoom-thumb"><img src={{this.image}} alt=""></a>
                                         <a href="/detail-view/{{this._id}}" class="quickview-link fancybox fancybox.iframe">Detail
                                             view</a>
                                     </div>
                                     <div class="product-info">
                                         <a href="#" class="cat-parent color">Mobile</a>
-                                        <h3 class="title16 font-bold product-title"><a href="#">{{this.title}}</a></h3>
+                                        <h3 class="title16 font-bold product-title text-capitalize"><a href="#">{{this.title}}</a></h3>
                                         <div class="product-price">
                                             <ins class="font-bold"><span>${{this.price}}</span></ins>
                                         </div>
@@ -157,10 +157,10 @@
                             {{/each}}
                             {{#each smartphone1}}
                             {{#each this}}
-                            <div class="col-md-3 col-sm-3 col-xs-6">
+                            <div class="col-md-3 col-sm-3 col-xs-6" >
                                 <div class="item-product text-center style1">
                                     <div class="product-thumb">
-                                        <a href="#" class="product-thumb-link zoom-thumb"><img src="{{this.image}}" alt=""></a>
+                                        <a href="#" class="product-thumb-link zoom-thumb"><img src="{{this.image}}" width="90px" height="180px" alt=""></a>
                                         <a href="/detail-view/{{this._id}}" class="quickview-link fancybox fancybox.iframe">Detail
                                             view</a>
                                         <div class="product-label">
@@ -168,7 +168,7 @@
                                     </div>
                                     <div class="product-info">
                                         <a href="#" class="cat-parent color">Mobile</a>
-                                        <h3 class="title16 font-bold product-title"><a href="#">{{this.title}}</a></h3>
+                                        <h3 class="title16 font-bold product-title text-capitalize"><a href="#">{{this.title}}</a></h3>
                                         <div class="product-price">
                                             <ins class="font-bold"><span>${{this.price}}</span></ins>
                                         </div>
@@ -204,7 +204,7 @@
                                     </div>
                                     <div class="product-info">
                                         <a href="#" class="cat-parent color">Mobile</a>
-                                        <h3 class="title16 font-bold product-title"><a href="#">{{this.title}}</a></h3>
+                                        <h3 class="title16 font-bold product-title text-capitalize"><a href="#">{{this.title}}</a></h3>
                                         <div class="product-price">
                                             <ins class="font-bold"><span>${{this.price}}</span></ins>
                                         </div>
@@ -236,7 +236,7 @@
                                     </div>
                                     <div class="product-info">
                                         <a href="#" class="cat-parent color">Mobile</a>
-                                        <h3 class="title16 font-bold product-title"><a href="#">{{this.title}}</a></h3>
+                                        <h3 class="title16 font-bold product-title text-capitalize"><a href="#">{{this.title}}</a></h3>
                                         <div class="product-price">
                                             <ins class="font-bold"><span>${{this.price}}</span></ins>
                                         </div>
@@ -319,7 +319,7 @@
                                     </div>
                                     <div class="product-info">
                                         <a href="#" class="cat-parent color">Laptop</a>
-                                        <h3 class="title16 font-bold product-title"><a href="#">{{this.title}}</a></h3>
+                                        <h3 class="title16 font-bold product-title text-capitalize"><a href="#">{{this.title}}</a></h3>
                                         <div class="product-price">
                                             <ins class="font-bold"><span>${{this.price}}</span></ins>
                                         </div>
@@ -351,7 +351,7 @@
                                     </div>
                                     <div class="product-info">
                                         <a href="#" class="cat-parent color">Laptop</a>
-                                        <h3 class="title16 font-bold product-title"><a href="#">{{this.title}}</a></h3>
+                                        <h3 class="title16 font-bold product-title text-capitalize"><a href="#">{{this.title}}</a></h3>
                                         <div class="product-price">
                                             <ins class="font-bold"><span>${{this.price}}</span></ins>
                                         </div>
@@ -387,7 +387,7 @@
                                     </div>
                                     <div class="product-info">
                                         <a href="#" class="cat-parent color">Laptop</a>
-                                        <h3 class="title16 font-bold product-title"><a href="#">{{this.title}}</a></h3>
+                                        <h3 class="title16 font-bold product-title text-capitalize"><a href="#">{{this.title}}</a></h3>
                                         <div class="product-price">
                                             <ins class="font-bold"><span>${{this.price}}</span></ins>
                                         </div>
@@ -419,7 +419,7 @@
                                     </div>
                                     <div class="product-info">
                                         <a href="#" class="cat-parent color">Laptop</a>
-                                        <h3 class="title16 font-bold product-title"><a href="#">{{this.title}}</a></h3>
+                                        <h3 class="title16 font-bold product-title text-capitalize"><a href="#">{{this.title}}</a></h3>
                                         <div class="product-price">
                                             <ins class="font-bold"><span>${{this.price}}</span></ins>
                                         </div>
@@ -463,7 +463,7 @@
                                     </div>
                                     <div class="product-info">
                                         <a href="#" class="cat-parent color">Watch</a>
-                                        <h3 class="title16 font-bold product-title"><a href="#">{{this.title}}</a></h3>
+                                        <h3 class="title16 font-bold product-title text-capitalize"><a href="#">{{this.title}}</a></h3>
                                         <div class="product-price">
                                             <ins class="font-bold"><span>${{this.price}}</span></ins>
                                         </div>
@@ -495,7 +495,7 @@
                                     </div>
                                     <div class="product-info">
                                         <a href="#" class="cat-parent color">Watch</a>
-                                        <h3 class="title16 font-bold product-title"><a href="#">{{this.title}}</a></h3>
+                                        <h3 class="title16 font-bold product-title text-capitalize"><a href="#">{{this.title}}</a></h3>
                                         <div class="product-price">
                                             <ins class="font-bold"><span>${{this.price}}</span></ins>
                                         </div>
@@ -531,7 +531,7 @@
                                     </div>
                                     <div class="product-info">
                                         <a href="#" class="cat-parent color">Watch</a>
-                                        <h3 class="title16 font-bold product-title"><a href="#">{{this.title}}</a></h3>
+                                        <h3 class="title16 font-bold product-title text-capitalize"><a href="#">{{this.title}}</a></h3>
                                         <div class="product-price">
                                             <ins class="font-bold"><span>${{this.price}}</span></ins>
                                         </div>
@@ -563,7 +563,7 @@
                                     </div>
                                     <div class="product-info">
                                         <a href="#" class="cat-parent color">Accessories</a>
-                                        <h3 class="title16 font-bold product-title"><a href="#">{{this.title}}</a></h3>
+                                        <h3 class="title16 font-bold product-title text-capitalize"><a href="#">{{this.title}}</a></h3>
                                         <div class="product-price">
                                             <ins class="font-bold"><span>${{this.price}}</span></ins>
                                         </div>

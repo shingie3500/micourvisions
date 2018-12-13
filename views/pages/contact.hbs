@@ -75,20 +75,22 @@
                         <div class="col-md-6 col-sm-6 col-xs-12">
                             <div class="contact-form-page">
                                 <h2 class="title18 font-bold text-uppercase rale-font">Contact Form</h2>
-                                <form class="contact-form">
+				{{msg}}
+                                <form class="contact-form" action="/sendmail" method="POST" >
                                     <p class="contact-name">
                                         <input class="navi border" onblur="if (this.value=='') this.value = this.defaultValue"
                                             onfocus="if (this.value==this.defaultValue) this.value = ''" value="User name*"
-                                            type="text">
+                                            type="text" name="username">
                                     </p>
                                     <p class="contact-email">
                                         <input class="navi border" onblur="if (this.value=='') this.value = this.defaultValue"
                                             onfocus="if (this.value==this.defaultValue) this.value = ''" value="Email*"
-                                            type="text">
+                                            type="text" name="email">
                                     </p>
                                     <p class="contact-message">
                                         <textarea class="navi border" onblur="if (this.value=='') this.value = this.defaultValue"
-                                            onfocus="if (this.value==this.defaultValue) this.value = ''" cols="30" rows="10">Your comment*</textarea>
+                                            onfocus="if (this.value==this.defaultValue) this.value = ''" cols="30" rows="10" name="comment" >Your 
+comment*</textarea>
                                     </p>
                                     <p class="contact-submit">
                                         <input class="shop-button bg-color" type="submit" value="Post Message">
