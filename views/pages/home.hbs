@@ -51,7 +51,7 @@
                     {{#each this}}
                     <div class="item-product text-center style1">
                         <div class="product-thumb">
-    
+
                             <a href="#" class="product-thumb-link zoom-thumb"><img src="{{this.image}}" alt="" /></a>
                             <a href="/detail-view/{{this._id}}" class="quickview-link fancybox fancybox.iframe">Detail
                                 view</a>
@@ -157,10 +157,11 @@
                             {{/each}}
                             {{#each smartphone1}}
                             {{#each this}}
-                            <div class="col-md-3 col-sm-3 col-xs-6" >
+                            <div class="col-md-3 col-sm-3 col-xs-6">
                                 <div class="item-product text-center style1">
                                     <div class="product-thumb">
-                                        <a href="#" class="product-thumb-link zoom-thumb"><img src="{{this.image}}" width="90px" height="180px" alt=""></a>
+                                        <a href="#" class="product-thumb-link zoom-thumb"><img src="{{this.image}}"
+                                                width="90px" height="180px" alt=""></a>
                                         <a href="/detail-view/{{this._id}}" class="quickview-link fancybox fancybox.iframe">Detail
                                             view</a>
                                         <div class="product-label">
@@ -197,8 +198,7 @@
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <div class="item-product text-center style1">
                                     <div class="product-thumb">
-                                        <a href="#" class="product-thumb-link zoom-thumb"><img src="{{this.image}}" 
-                                                 alt=""></a>
+                                        <a href="#" class="product-thumb-link zoom-thumb"><img src="{{this.image}}" alt=""></a>
                                         <a href="/detail-view/{{this._id}}" class="quickview-link fancybox fancybox.iframe">Detail
                                             view</a>
                                     </div>
@@ -312,8 +312,7 @@
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <div class="item-product text-center style1">
                                     <div class="product-thumb">
-                                        <a href="#" class="product-thumb-link zoom-thumb"><img src="{{this.image}}" 
-                                                 alt=""></a>
+                                        <a href="#" class="product-thumb-link zoom-thumb"><img src="{{this.image}}" alt=""></a>
                                         <a href="/detail-view/{{this._id}}" class="quickview-link fancybox fancybox.iframe">Detail
                                             view</a>
                                     </div>
@@ -380,8 +379,7 @@
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <div class="item-product text-center style1">
                                     <div class="product-thumb">
-                                        <a href="#" class="product-thumb-link zoom-thumb"><img src="{{this.image}}" 
-                                                 alt=""></a>
+                                        <a href="#" class="product-thumb-link zoom-thumb"><img src="{{this.image}}" alt=""></a>
                                         <a href="/detail-view/{{this._id}}" class="quickview-link fancybox fancybox.iframe">Detail
                                             view</a>
                                     </div>
@@ -456,8 +454,7 @@
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <div class="item-product text-center style1">
                                     <div class="product-thumb">
-                                        <a href="#" class="product-thumb-link zoom-thumb"><img src="{{this.image}}" 
-                                                 alt=""></a>
+                                        <a href="#" class="product-thumb-link zoom-thumb"><img src="{{this.image}}" alt=""></a>
                                         <a href="/detail-view/{{this._id}}/{{this._id}}" class="quickview-link fancybox fancybox.iframe">Detail
                                             view</a>
                                     </div>
@@ -524,8 +521,7 @@
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <div class="item-product text-center style1">
                                     <div class="product-thumb">
-                                        <a href="#" class="product-thumb-link zoom-thumb"><img src="{{this.image}}" 
-                                                 alt=""></a>
+                                        <a href="#" class="product-thumb-link zoom-thumb"><img src="{{this.image}}" alt=""></a>
                                         <a href="/detail-view/{{this._id}}/{{this._id}}" class="quickview-link fancybox fancybox.iframe">Detail
                                             view</a>
                                     </div>
@@ -631,8 +627,15 @@
 </section>
 {{>footer}}
 <script>
-        function expiration() {
-            var clock = document.getElementById('clockdiv');
+    function expiration() {
+        var clock = document.getElementById('clockdiv');
+        var stat = '';
+        if (clock === null) {
+            stat = 'false';
+        } else {
+            stat = 'true';
+        }
+        if (stat === 'true') {
             var a = clock.getAttribute("data-expdate");
             function convert(str) {
                 var date = new Date(str),
@@ -673,5 +676,7 @@
                 }
             }, 1000);
         }
-        expiration();
+
+    }
+    expiration();
 </script>

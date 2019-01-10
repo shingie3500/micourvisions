@@ -11,10 +11,10 @@ const express = require('express'),
     nodemailer = require('nodemailer'),
     Cart = require('../models/cart');
 
+
 Product.find({
         category: 'mobile'
     }).then((response) => {
-        //console.log(response);
         featuredmobile.push(response.slice(0, 5));
     })
     .catch((error) => {
@@ -24,8 +24,6 @@ Product.find({
 Product.find({
         category: 'laptop'
     }).then((response) => {
-        console.log(response);
-        console.log("response");
         featuredlaptop.push(response.slice(0, 5));
 
     })
@@ -38,15 +36,26 @@ router.get('/checkout', isLoggedIn, function(req, res, next) {
     if (!req.session.cart) {
         return res.redirect('/shopping-cart');
     }
+    Order.find({
+        user: req.user._id
+    }, (err, orders) => {
+        if (err) {
+            return res.write('Error!');
+        }
+        var length = orders.length;
 
-    var cart = new Cart(req.session.cart);
-    res.render('pages/checkout', {
-        featuredmobile: featuredmobile,
-        featuredlaptop: featuredlaptop,
-        user: req.user,
-        product: cart.generateArray(),
-        totalPrice: cart.totalPrice
+        var cart = new Cart(req.session.cart);
+        res.render('pages/checkout', {
+            featuredmobile: featuredmobile,
+            featuredlaptop: featuredlaptop,
+            user: req.user,
+            product: cart.generateArray(),
+            totalPrice: cart.totalPrice,
+            paycash: length > 5
+        });
+
     });
+
 });
 
 router.post('/checkout', isLoggedIn, function(req, res, next) {
@@ -56,6 +65,7 @@ router.post('/checkout', isLoggedIn, function(req, res, next) {
     }
     var cart = new Cart(req.session.cart);
     var fields = {
+        user: req.user._id,
         cart: cart,
         country: req.body.country,
         address: req.body.address,
@@ -64,10 +74,13 @@ router.post('/checkout', isLoggedIn, function(req, res, next) {
         company: req.body.company,
         name: req.body.name,
         surname: req.body.surname,
-        value: req.body.orderPrice
+        value: req.body.orderPrice,
+        payment_btn: 'show',
+        payment_status: 'No Payment',
+        orderDate: new Date(),
+        payment_method: req.body.payment_method
     }
 
-    // implement pay now here
     var order = new Order(fields);
     order.save(function(err, result) {
         if (err) {
@@ -76,8 +89,44 @@ router.post('/checkout', isLoggedIn, function(req, res, next) {
         }
         req.flash('success', 'Succesfully placed order!');
         req.session.cart = null;
-        res.redirect('/');
+        res.redirect('/user/profile');
     });
+});
+
+router.get('/removefromWishlist/:id', isLoggedIn2, function(req, res, next) {
+    var productId = req.params.id;
+    Wishlist.findOne({
+        'userId': req.user._id
+    }, (err, obj) => {
+        if (err) {
+            return ('error: ' + err);
+        } else {
+            let list = [];
+            for (var i = 0; i < obj.list.length; i++) {
+                list.push(obj.list[i]);
+            };
+
+            list = list.filter((product) => {
+                return product._id != productId
+            });
+
+            Wishlist.updateOne({
+                'userId': req.user._id
+            }, {
+                $set: {
+                    list: list
+                }
+            }, (err, raw) => {
+                if (err) {
+                    res.send(err);
+                }
+                res.send(raw);
+            });
+        }
+    }).catch((error) => {
+        console.log(error);
+    });
+
 });
 
 router.get('/addtoWishlist/:id', isLoggedIn2, function(req, res, next) {
@@ -86,7 +135,6 @@ router.get('/addtoWishlist/:id', isLoggedIn2, function(req, res, next) {
     Product.find({
         _id: productId
     }).then((docs) => {
-        console.log(req.user)
         Wishlist.findOne({
             'userId': req.user._id
         }, (err, obj) => {
@@ -101,15 +149,11 @@ router.get('/addtoWishlist/:id', isLoggedIn2, function(req, res, next) {
 
                 for (var i = 0; i < list.length; i++) {
                     var s = list[i]._id;
-                    var a = list[0]._id;
+                    var a = docs[0]._id;
                     var x = s.toString();
                     var y = a.toString();
-
-                    console.log(x + '=====' + y);
-
                     if (x == y) {
                         found = true;
-                        console.log(found);
                         break;
                     }
 
@@ -117,8 +161,6 @@ router.get('/addtoWishlist/:id', isLoggedIn2, function(req, res, next) {
                 if (found == false) {
                     list.push(docs[0]);
                 }
-                console.log(found);
-                console.log(list);
                 Wishlist.updateOne({
                     'userId': req.user._id
                 }, {
@@ -141,7 +183,6 @@ router.get('/addtoWishlist/:id', isLoggedIn2, function(req, res, next) {
                     if (err) {
                         console.log(err);
                     }
-                    //console.log(newWishlist);
                 });
             }
         });
@@ -157,7 +198,6 @@ router.get('/shop/addtoWishlist/:id', isLoggedIn2, function(req, res, next) {
     Product.find({
         _id: productId
     }).then((docs) => {
-        console.log(req.user)
         Wishlist.findOne({
             'userId': req.user._id
         }, (err, obj) => {
@@ -172,15 +212,11 @@ router.get('/shop/addtoWishlist/:id', isLoggedIn2, function(req, res, next) {
 
                 for (var i = 0; i < list.length; i++) {
                     var s = list[i]._id;
-                    var a = list[0]._id;
+                    var a = docs[0]._id;
                     var x = s.toString();
                     var y = a.toString();
-
-                    console.log(x + '=====' + y);
-
                     if (x == y) {
                         found = true;
-                        console.log(found);
                         break;
                     }
 
@@ -188,8 +224,6 @@ router.get('/shop/addtoWishlist/:id', isLoggedIn2, function(req, res, next) {
                 if (found == false) {
                     list.push(docs[0]);
                 }
-                console.log(found);
-                console.log(list);
                 Wishlist.updateOne({
                     'userId': req.user._id
                 }, {
@@ -212,7 +246,6 @@ router.get('/shop/addtoWishlist/:id', isLoggedIn2, function(req, res, next) {
                     if (err) {
                         console.log(err);
                     }
-                    //console.log(newWishlist);
                 });
             }
         });
@@ -221,6 +254,7 @@ router.get('/shop/addtoWishlist/:id', isLoggedIn2, function(req, res, next) {
     });
 
 });
+
 
 router.get('/', function(req, res, next) {
     var productschun = [],
@@ -253,7 +287,6 @@ router.get('/', function(req, res, next) {
                         console.log(error);
                     });
             };
-            console.log(trending);
         })
         .catch((error) => {
             console.log(error);
@@ -361,6 +394,7 @@ router.get('/home', function(req, res, next) {
             console.log(error);
         });
 
+
     Product.find({
             dealoftheday: true
         }).then((response) => {
@@ -369,6 +403,7 @@ router.get('/home', function(req, res, next) {
         .catch((error) => {
             console.log(error);
         });
+
     Product.find({
             category: 'mobile'
         }).then((response) => {
@@ -383,10 +418,10 @@ router.get('/home', function(req, res, next) {
     Product.find({
             category: 'laptop'
         }).then((response) => {
-            featuredl1.push(response.slice(1, 2));
-            featuredl2.push(response.slice(2, 3));
-            laptop1.push(response.slice(3, 7));
-            laptop2.push(response.slice(7, 11));
+            featuredl1.push(response.slice(0, 1));
+            featuredl2.push(response.slice(1, 2));
+            laptop1.push(response.slice(2, 6));
+            laptop2.push(response.slice(6, 10));
         })
         .catch((error) => {
             console.log(error);
@@ -394,10 +429,10 @@ router.get('/home', function(req, res, next) {
     Product.find({
             category: 'accessories'
         }).then((response) => {
-            featureda1.push(response.slice(1, 2));
-            featureda2.push(response.slice(2, 3));
-            accessories1.push(response.slice(3, 7));
-            accessories2.push(response.slice(7, 11));
+            featureda1.push(response.slice(0, 1));
+            featureda2.push(response.slice(1, 2));
+            accessories1.push(response.slice(2, 6));
+            accessories2.push(response.slice(6, 10));
             res.render('pages/home', {
                 featuredmobile: featuredmobile,
                 featuredlaptop: featuredlaptop,
@@ -424,6 +459,8 @@ router.get('/home', function(req, res, next) {
             console.log(error);
         });
 });
+
+
 
 router.get('/about', function(req, res, next) {
     res.render('pages/about', {

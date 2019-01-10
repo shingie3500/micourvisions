@@ -1,11 +1,36 @@
 $(document).ready(() => {
-    $('a#sattech').on('click', (event) => {
-        event.preventDefault();
-        //window.open('www.sattech.co.zw', '_blank');
-        URL.replace('www.sattech.co.zw', '_blank')
+    $(function() {
+        var viewModel = {};
+        viewModel.fileData = ko.observable({
+            dataURL: ko.observable(),
+            // base64String: ko.observable(),
+        });
+        viewModel.multiFileData = ko.observable({
+            dataURLArray: ko.observableArray(),
+        });
+        viewModel.onClear = function(fileData) {
+            if (confirm('Are you sure?')) {
+                fileData.clear && fileData.clear();
+            }
+        };
+        viewModel.debug = function() {
+            window.viewModel = viewModel;
+            console.log(ko.toJSON(viewModel));
+            debugger;
+        };
+        ko.applyBindings(viewModel);
     });
-    $('.form').find('input, textarea').on('keyup blur focus', function (e) {
-
+    $('.form').find('input, textarea').on('keyup blur focus', function(e) {
+        var msg = document.getElementById("msg")
+        var stat = '';
+        if (msg === null) {
+            stat = 'false';
+        } else {
+            stat = 'true';
+        }
+        if (stat === 'true') {
+            msg.remove()
+        }
         var $this = $(this),
             label = $this.prev('label');
 
@@ -33,7 +58,7 @@ $(document).ready(() => {
 
     });
 
-    $('a.page-item-btn').bind('click', function (e) {
+    $('a.page-item-btn').bind('click', function(e) {
         const id = "#" + $(this).attr('id');
         const pageid = "#content-" + $(this).attr('id');
         $(".active").removeClass("page-current").removeClass("active");
@@ -45,6 +70,21 @@ $(document).ready(() => {
         }, 0);
         e.preventDefault();
     });
+    /*
+    var s = document.getElementById('data');
+    var myObj = s.getAttribute("data");
+    var data = JSON.stringify(myObj)
+    console.log(myObj);
+*/
+    $('.wrrapper').each(function(i, obj) {
+        var a = obj.getAttribute('data-img');
+        var id = obj.getAttribute('data-id');
+        var clas = '.' + id;
+        var b = a.replace(/\\/g, "/");
+        var url = "http://localhost:8080/" + b;
+        $(clas).attr('style', 'background: url("' + url + '") 20% 1% / cover no-repeat !important')
+    });
+
 
     $('a#prev').on('click', (e) => {
         const pageid = $('.show').attr('id');
@@ -71,7 +111,7 @@ $(document).ready(() => {
         e.preventDefault();
     })
 
-    $('#qty_id').on('click', function () {
+    $('#qty_id').on('click', function() {
         const val = document.getElementById('qty_id').innerHTML
         $('input[name=quantity]').val(val);
     });
@@ -99,7 +139,7 @@ $(document).ready(() => {
         e.preventDefault();
     });
 
-    $(document).on("click", ".createUserform", function () {
+    $(document).on("click", ".createUserform", function() {
         $(this).find('#userform').validate({
             rules: {
                 password: {
@@ -114,49 +154,49 @@ $(document).ready(() => {
                     equalTo: "Make sure the two passwords are matching"
                 }
             },
-            highlight: function (element) {
+            highlight: function(element) {
                 $(element).parent().addClass('error')
             },
-            unhighlight: function (element) {
+            unhighlight: function(element) {
                 $(element).parent().removeClass('error')
             },
             onsubmit: true
         });
     })
 
-    $('a.qty-up').on('click', (event)=>{
+    $('a.qty-up').on('click', (event) => {
         event.preventDefault();
         var add = document.getElementById('qty-add');
         var Url = add.getAttribute('data-href');
-       
+
         $.ajax({
             url: Url,
             type: 'GET',
-            success: function (result) {
+            success: function(result) {
                 console.log(result);
             },
-            error: function (error) {
+            error: function(error) {
                 console.log(error);
             }
         });
     })
 
-    $('a.qty-down').on('click', (event)=>{
+    $('a.qty-down').on('click', (event) => {
         event.preventDefault();
         var add = document.getElementById('qty-sub');
         var Url = add.getAttribute('data-href');
-       
+
         $.ajax({
             url: Url,
             type: 'GET',
-            success: function (result) {
-                if(result.toString()== '/shopping-cart'){
+            success: function(result) {
+                if (result.toString() == '/shopping-cart') {
                     window.location.href = '/shopping-cart';
-                }else{
-                    
+                } else {
+
                 };
             },
-            error: function (error) {
+            error: function(error) {
                 console.log(error);
             }
         });

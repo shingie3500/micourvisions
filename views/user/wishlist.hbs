@@ -1,0 +1,109 @@
+{{>headerUser}}
+
+<div class="row">
+    <hr>
+    <div class="col-md-8 col-md-offset-2">
+        <h2>My Wishlist</h2>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <ul class="list-group">
+                    {{#each wishlist}}
+                    <li class="list-group-item" id="{{_id}}">
+                        <div class="item-product item-product-list drop-shadow">
+
+                            <div class="row">
+                                <div class="col-md-4 col-sm-5 col-xs-12">
+                                    <div class="product-thumb">
+                                        <a href="#" class="product-thumb-link zoom-thumb"><img src="../{{image}}" alt=""></a>
+                                        <a href="/detail-view/{{_id}}" class="quickview-link fancybox fancybox.iframe">Detail
+                                            view</a>
+                                    </div>
+                                </div>
+                                <div class="col-md-8 col-sm-7 col-xs-12">
+                                    <div class="product-info">
+                                        <a href="#" class="cat-parent color">{{category}}</a>
+                                        <h3 class="title16 font-bold product-title"><a href="#">{{title}}</a></h3>
+                                        <div class="product-price">
+                                            <ins class="font-bold"><span>${{price}}</span></ins>
+                                        </div>
+                                        <div class="product-rate">
+                                            <div class="product-rating" style="width:100%"></div>
+                                        </div>
+                                        <p class="desc product-desc"> {{shortDescription}} .</p>
+                                        <div class="product-extra-link style1">
+                                            <a href="/add-to-cart/{{_id}}" class="testBtn addcart-link shop-button color">Add
+                                                to cart</a>
+                                                <a data-id="{{_id}}" onclick="removefromWishlist(this)"
+                                                class="wishlist-link color title30"><i class="icon ion-trash-a"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                    </li>
+                    {{/each}}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{{>footerUser}}
+<script>
+     function removefromWishlist(item) {
+      var id = item.getAttribute('data-id');
+      var Url = "/removefromWishlist/" + id;
+      var del = "#" + id;
+      $.ajax({
+        url: Url,
+        type: 'GET',
+        success: function (result) {
+          if (result.toString() == "/user/signin") {
+            alert("Login First!!!")
+            window.location.href = "http://micourvisions.com" + result;
+          }
+          else {
+            console.log('removed from wishlist');
+          }
+        },
+        error: function (error) {
+          console.log(error);
+        }
+      });
+
+      $(del).remove()
+
+    }
+ 
+    function expiration() {
+        var orddate = document.getElementById('orderdat');
+        var stat = '';
+        if (orddate === null) {
+            stat = 'false';
+        } else {
+            stat = 'true';
+        }
+        if (stat === 'true') {
+            var orddate2 = document.getElementById('orderdat2');
+            var paydate = document.getElementById('paymentdate');
+            var delidate = document.getElementById('deliverydate');
+            var a = orddate.getAttribute("data-date");
+            var b = orddate2.getAttribute("data-date");
+            var c = paydate.getAttribute("data-date");
+            var d = delidate.getAttribute("data-date");
+            function convert(str) {
+                var date = new Date(str),
+                    mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+                    day = ("0" + date.getDate()).slice(-2);
+                return [mnth, day, date.getFullYear()].join("/");
+            }
+            orddate.innerHTML = convert(a);
+            orddate2.innerHTML = convert(b);
+            paydate.innerHTML = convert(c);
+            delidate.innerHTML = convert(d);
+        }
+
+    }
+    expiration();
+
+</script>

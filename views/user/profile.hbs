@@ -1,24 +1,282 @@
+<style>
+    @import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,700);
+* {
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+}
+
+h1 {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 300;
+}
+
+.float-right{
+    float: right !important;
+}
+
+.card {
+  float: left;
+  padding: 0 1.7rem;
+  margin-bottom: 25px;
+  width: 50%;
+}
+.card .menu-content {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+.card .menu-content::before, .card .menu-content::after {
+  content: '';
+  display: table;
+}
+.card .menu-content::after {
+  clear: both;
+}
+.card .menu-content li {
+  display: inline-block;
+}
+.card .menu-content a {
+  color: #fff;
+}
+.card .menu-content span {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  font-size: 10px;
+  font-weight: 700;
+  font-family: 'Open Sans';
+  -webkit-transform: translate(-50%, 0);
+          transform: translate(-50%, 0);
+}
+.card .wrapper {
+  background-color: #fff;
+  min-height: 250px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.2);
+}
+.card .wrapper:hover .data {
+  -webkit-transform: translateY(0);
+          transform: translateY(0);
+}
+.card .data {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  -webkit-transform: translateY(calc(70px + 1em));
+          transform: translateY(calc(70px + 1em));
+  transition: -webkit-transform 0.3s;
+  transition: transform 0.3s;
+  transition: transform 0.3s, -webkit-transform 0.3s;
+}
+.card .data .content {
+  padding: 1em;
+  position: relative;
+  z-index: 1;
+}
+.card .author {
+  font-size: 12px;
+}
+.card .title {
+  margin-top: 10px;
+}
+.card .text {
+  height: 70px;
+  margin: 0;
+}
+.card input[type='checkbox'] {
+  display: none;
+}
+.card input[type='checkbox']:checked + .menu-content {
+  -webkit-transform: translateY(-60px);
+          transform: translateY(-60px);
+}
+
+.example-2 .wrapper:hover .menu-content span {
+  -webkit-transform: translate(-50%, -10px);
+          transform: translate(-50%, -10px);
+  opacity: 1;
+}
+.example-2 .header {
+  color: #000;
+  padding: 1em;
+}
+.example-2 .header::before, .example-2 .header::after {
+  content: '';
+  display: table;
+}
+.example-2 .header::after {
+  clear: both;
+}
+.example-2 .header .date {
+  float: left;
+  font-size: 12px;
+}
+.example-2 .menu-content {
+  float: right;
+}
+.example-2 .menu-content li {
+  margin: 0 5px;
+  position: relative;
+}
+.example-2 .menu-content span {
+  transition: all 0.3s;
+  opacity: 0;
+}
+.example-2 .data {
+  color: #000;
+  -webkit-transform: translateY(calc(70px + 4em));
+          transform: translateY(calc(70px + 4em));
+}
+
+    #proccedtopayment {
+        float: right;
+    }
+
+</style>
 {{>headerUser}}
 
 <div class="row">
+    <hr>
     <div class="col-md-8 col-md-offset-2">
-        <h1>User Profile</h1>
-        <hr>
         <h2>My Orders</h2>
         {{#each order}}
+
         <div class="panel panel-default">
-            <div class="panel-body">
-                <ul class="list-group">
-                    {{#each this.items}}
-                    <li class="list-group-item">
-                        <div class="product-thumbnail">
-                            <a href="#"><img src="../{{this.item.imagePath}}" alt="" width="70px" height="50px" /></a>
+            <div class="panel-body row">
+                {{#each this.items}}
+                <div class="example-2 card">
+                        <div class="wrapper wrrapper {{this.item._id}}" data-id="{{this.item._id}}" data-img="{{this.item.image}}">
+                            <div class="header">
+                                <div class="date text-capitalize">
+                                    <span class="day">{{this.item.brand}}</span>
+                                    <span class="day">{{this.item.title}}</span>
+                                </div>
+                                <div class="date text-capitalize float-right">
+                                    <span class="day">Quantity: {{this.qty}}</span>
+                                </div>
+                            </div>
+                            <div class="data">
+                                <div class="content">
+                                    <p class="text">Price: ${{this.item.price}}</p>
+                                </div>
+                            </div>
                         </div>
-                        {{this.item.title}} | <span>{{this.qty}} Unit(s)</span>
-                        <span class="badge">${{this.price}}</span>
-                    </li>
-                    {{/each}}
-                </ul>
+                </div>
+                {{/each}}
+                <br style="clear:both">
+                <p style="margin-left: 15px">
+                    <a class="btn btn-primary" data-toggle="collapse" href="#{{this._id}}" role="button" aria-expanded="false"
+                        aria-controls="collapseExample">
+                        Check Payment
+                    </a>
+                    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#{{this._id}}2"
+                        aria-expanded="false" aria-controls="collapseExample">
+                        Check Delivery
+                    </button>
+                </p>
+
+                <div class="collapse" id="{{this._id}}">
+
+                    <div class="card-body">
+                        <table class="table table-dark">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Order Id</th>
+                                    <th scope="col">Order Date</th>
+                                    <th scope="col">Payment Status</th>
+                                    <th scope="col">Payment Date</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>{{this._id}}</td>
+                                    <td id="orderdat" class="orderdate" data-date="{{this.orderDate}}"></td>
+                                    <td>{{this.payment_status}}</td>
+                                    <td id="paymentdate" data-date="{{this.paymentDate}}"></td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                        <hr>
+                        <!-- Button trigger modal -->
+
+                        <button type="button" class="{{this.payment_btn}} btn btn-primary" id="proccedtopayment"
+                            data-toggle="modal" data-target="#{{this._id}}ModalCenter">
+                            Proceed To Payment
+                        </button>
+                        <!-- Modal -->
+                        <form action="/user/payment-confirm" method="post" enctype="multipart/form-data">
+                            <div class="modal fade" id="{{this._id}}ModalCenter" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalCenterTitle">Payment</h5>
+                                        </div>
+                                        <div class="modal-body">
+
+                                            <div class="well" data-bind="fileDrag: fileData">
+                                                <div class="form-group row">
+                                                    <div class="col-md-6">
+                                                        <img style="height: 125px;" class="img-rounded  thumb"
+                                                            data-bind="attr: { src: fileData().dataURL }, visible: fileData().dataURL">
+                                                        <div data-bind="ifnot: fileData().dataURL">
+                                                            <label class="drag-label">Drag file here</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <input type="file" name="payment-confirm-img" data-bind="fileInput: fileData, customFileInput: {
+                                                                      buttonClass: 'btn btn-primary',
+                                                                      fileNameClass: 'disabled form-control',
+                                                                      onClear: onClear,
+                                                                    }"
+                                                            accept="image/*">
+                                                        <input type="hidden" name="order_id" value="{{this.id}}">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                            <button type="submit" class="btn btn-primary">Proceed</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+                <div class="collapse" id="{{this._id}}2">
+                    <div class="card-body">
+                        <table class="table table-dark">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Payment Status</th>
+                                    <th scope="col">Order Date</th>
+                                    <th scope="col">Delivery Status</th>
+                                    <th scope="col">Delivery Date</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>{{this.payment_status}}</td>
+                                    <td id="orderdat2" data-date="{{this.orderDate}}"></td>
+                                    <td>{{this.delivery_status}}</td>
+                                    <td id="deliverydate" data-date="{{this.deliveryDate}}"></td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
             <div class="panel-footer"><strong>Total Price: ${{this.cart.totalPrice}}</strong></div>
         </div>
@@ -26,3 +284,36 @@
     </div>
 </div>
 {{>footerUser}}
+<script>
+    function expiration() {
+        var orddate = document.getElementById('orderdat');
+        var stat = '';
+        if (orddate === null) {
+            stat = 'false';
+        } else {
+            stat = 'true';
+        }
+        if (stat === 'true') {
+            var orddate2 = document.getElementById('orderdat2');
+            var paydate = document.getElementById('paymentdate');
+            var delidate = document.getElementById('deliverydate');
+            var a = orddate.getAttribute("data-date");
+            var b = orddate2.getAttribute("data-date");
+            var c = paydate.getAttribute("data-date");
+            var d = delidate.getAttribute("data-date");
+            function convert(str) {
+                var date = new Date(str),
+                    mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+                    day = ("0" + date.getDate()).slice(-2);
+                return [mnth, day, date.getFullYear()].join("/");
+            }
+            orddate.innerHTML = convert(a);
+            orddate2.innerHTML = convert(b);
+            paydate.innerHTML = convert(c);
+            delidate.innerHTML = convert(d);
+        }
+
+    }
+    expiration();
+
+</script>

@@ -35,7 +35,7 @@
                 </div>
                 {{#if hasErrors}}
                 {{#each message}}
-                <p id="msg" class="alert alert-danger" data-toggle="tooltip" data-placement="right" title="Tooltip on right">
+                <p id="msg" class="alert alert-danger"  data-toggle="tooltip" data-placement="right" title="Tooltip on right">
                     {{this}}
                 </p>
 
@@ -51,7 +51,7 @@
 
                 <p class="forgot"> <a href="#">Forgot Password?</a> | <a href="/user/signup">Don't have an account?</a></p>
                 <input type="hidden" name="_csrf" value="{{csrfToken}}">
-                <button class="button button-block" />Log In</button>
+                <button id="signin" class="button button-block" />Log In</button>
 
             </form>
 

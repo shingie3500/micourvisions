@@ -4352,6 +4352,17 @@ div.table .product-info .product-title {
     padding: 20px;
 }
 
+.table-darken {
+    color: #fff;
+    background-color: #212529 !important;
+}
+
+.table-darken th,
+.table-darken td,
+.table-darken thead th {
+    border-color: #32383e !important;
+}
+
 .table-group-detail .product-thumb {
     margin: auto;
     width: 100px;

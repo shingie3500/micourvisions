@@ -11,8 +11,8 @@
   <meta name="robots" content="noodp,index,follow" />
   <meta name='revisit-after' content='1 days' />
   <title>MiCourVision | Home </title>
-    <link rel="icon" href="images/home/home1/logo-footer.png">
-    <link rel="icon" href="images/home/home1/logo-footer.png">
+  <link rel="icon" href="images/home/home1/logo-footer.png">
+  <link rel="icon" href="images/home/home1/logo-footer.png">
 
   <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css'>
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
@@ -36,15 +36,15 @@
     /* Style The Dropdown1 Button */
     .dropbtn {
       text-decoration: none;
-    
+
     }
-  
+
     /* The container <div> - needed to position the dropdown1 content */
     .dropdown1 {
       position: relative;
       display: inline-block;
     }
-  
+
     /* Dropdown1 Content (Hidden by Default) */
     .dropdown1-content {
       display: none;
@@ -55,7 +55,7 @@
       z-index: 1;
 
     }
-  
+
     /* Links inside the dropdown1 */
     .dropdown1-content a {
       color: black;
@@ -63,17 +63,16 @@
       text-decoration: none;
       display: block;
     }
-  
+
     /* Change color of dropdown1 links on hover */
     .dropdown1-content a:hover {
       background-color: #f1f1f1
     }
-  
+
     /* Show the dropdown1 menu on hover */
     .dropdown1:hover .dropdown1-content {
       display: block;
     }
-
   </style>
 
 </head>
@@ -92,6 +91,8 @@
   <script src="js/libs/jquery.elevatezoom.min.js"></script>
   <script src="js/libs/popup.min.js"></script>
   <script src="js/libs/timecircles.min.js"></script>
+  <script src='../js/libs/knockout-min.js'></script>
+  <script src='../js/libs/knockout-file-bindings.js'></script>
   <script src="js/libs/wow.min.js"></script>
   <script src="js/theme.js"></script>
   <script src="js/main.js"></script>
@@ -101,7 +102,7 @@
       $.ajax({
         url: Url,
         type: 'GET',
-        success: function (result){
+        success: function (result) {
           if (result.toString() == "/user/signin") {
             alert("Login First!!!")
             window.location.href = "http://micourvisions.com" + result;
@@ -110,11 +111,11 @@
             console.log('added to wishlist');
           }
         },
-        error: function(error){
+        error: function (error) {
           console.log(error);
         }
       });
-      
+
       $('.wishlist-mask').fadeIn();
       var counter = 5;
       var popup;
@@ -128,6 +129,7 @@
         }
       }, 1000);
     }
+   
   </script>
 </body>
 

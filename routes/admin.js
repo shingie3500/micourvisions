@@ -15,6 +15,16 @@ const express = require('express'),
     router = express.Router(),
     featuredmobile = [],
     featuredlaptop = [];
+const mongoose = require('mongoose');
+const Grid = require('gridfs-stream');
+const conn = mongoose.createConnection('mongodb://localhost:27017/micourvisions');
+
+let gfs;
+
+conn.once('open', () => {
+    gfs = Grid(conn.db, mongoose.mongo);
+    gfs.collection('uploads');
+})
 
 Product.find({
         category: 'mobile'
@@ -95,5 +105,24 @@ router.post('/data', fupload, function(req, res, next) {
         msg: "Product has been saved"
     });
 });
+
+router.get('/image/:filename', (req, res, next) => {
+    gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
+        console.log(file)
+        if (!file || file.length === 0) {
+            return res.status(404).json({
+                err: 'No file exists'
+            })
+        }
+        if (file.contentType === 'image/jpeg' || file.contentType === 'image/png') {
+            const readstream = gfs.createReadStream(file.filename);
+            readstream.pipe(res);
+        } else {
+            return res.status(404).json({
+                err: 'Not an image'
+            })
+        }
+    })
+})
 
 module.exports = router;

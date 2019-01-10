@@ -10,6 +10,10 @@ var schema = new Schema({
         type: Object,
         required: true
     },
+    orderDate: {
+        type: Date,
+        required: true
+    },
     country: {
         type: String,
         required: true
@@ -37,6 +41,28 @@ var schema = new Schema({
     surname: {
         type: String,
         required: true
+    },
+    payment_status: {
+        type: String
+    },
+    paymentDate: {
+        type: Date
+    },
+    payment_btn: {
+        type: String
+    },
+    payment_img: {
+        type: String
+    },
+    payment_method: {
+        type: String,
+        required: true
+    },
+    delivery_status: {
+        type: String
+    },
+    deliveryDate: {
+        type: Date
     },
     value: {
         type: Number,
